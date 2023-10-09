@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'homeapp/css/home.css' %}">
+    <meta charset="UTF-8">
+    <title>
+        {% block page-title %}
+            Главная
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="{% static 'homeapp/img/logo.png' %}" alt="logo">
+        </div>
+    </header>
+    <nav>
+        <ul>
+            {% block common-menu %}
+                <li>
+                    <a href="#">
+                        Главная
+                    </a>
+                </li>
+                {% if user.isauthenticated %}
+                    <li>
+                        <a href="#">
+                            Профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Выйти
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="#">
+                            войти
+                        </a>
+                    </li>
+                {% endif %}
+            {% endblock %}
+        </ul>
+    </nav>
+</body>
+</html>
