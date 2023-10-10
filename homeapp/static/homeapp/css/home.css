@@ -1,59 +1,88 @@
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-header {
-    width: 100%;
-    height: 58px;
-    background: #FFE96E;
-}
-.logo {
-    height: 100%;
-    width: 177px;
-}
-nav {
-    width: 960px;
-    margin: 0 auto;
-}
-nav:before {
-    content: '';
-    display: block;
-    height: 25px;
-    width: 100%;
-    background: #00963A;
-    position: absolute;
-    left: 0;
-    z-index: -1;
+.menu ul,
+.menu li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    height: 20px;
-    vertical-align: center;
+.menu ul {
+  /*background-color: #f9f9f9;*/
 }
 
-ul li {
-    float: left;
-    text-align: center;
-    vertical-align: center;
+.menu ul li {
+  display: inline-block;
 }
 
-ul li a {
-    color: #FFE96E;
-    background: #00963A;
-    display: block;
-    /*height: 50px;*/
-    padding: 0 15px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 22px;
-    text-decoration: none;
+.menu ul li a {
+  display: block;
+  padding: 10px 20px;
+  color: #00963A;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-ul li a:hover {
-    background: #FFE96E;
-    color: #00963A;
+.menu ul li:hover > a {
+  background-color: #00963A;
+  color: #FFE96E;
+}
+
+.menu ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  /*background-color: #fff;*/
+  border: 1px solid #ddd;
+}
+
+.menu ul li:hover > ul {
+  display: inherit;
+}
+
+.menu ul ul li {
+  width: 200px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+
+.menu ul ul ul li {
+  position: relative;
+  top: -60px;
+  left: 200px;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+}
+
+.menu ul ul li a {
+  padding: 10px 30px;
+  color: #333;
+}
+
+.menu ul ul li a:hover {
+  /*background-color: #ddd;*/
+}
+
+.menu ul ul ul li a {
+  padding-left: 40px;
+}
+
+.menu ul ul ul {
+  border-top: 0;
+  left: 100%;
+  top: 0;
+}
+
+.menu ul ul > li:hover > ul,
+.menu ul li:hover > ul {
+  display: inherit;
+}
+
+.menu::after {
+  content: "";
+  clear: both;
+  display: block;
 }
