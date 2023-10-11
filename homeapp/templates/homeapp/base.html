@@ -11,42 +11,58 @@
     </title>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="{% url 'homeapp:index' %}">
-                <img src="{% static 'homeapp/img/logo.png' %}" alt="logo">
-            </a>
-        </div>
-    </header>
-<nav class="menu">
-    <ul>
-        {% if user.is_authenticated %}
-            <li>
-                <a href="#">
-                    профиль
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    сотрудники
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    выйти
-                </a>
-            </li>
-        {% else %}
-            <li>
-                <a href="#">
-                    войти
-                </a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
-<div class="leftmenubar">
-    kklk
+<header>
+
+    <a href="{% url 'homeapp:index' %}" class="logo">
+        <img src="{% static 'homeapp/img/logo.png' %}" alt="logo">
+    </a>
+
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="#">
+                        выйти
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        профиль
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        сотрудники
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="#">
+                        войти
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+</header>
+<div class="bottom-area">
+    <div class="left-menu">
+        {% block lef-menu %}
+            <nav id="page-menu">
+                <ul>
+                    {% block menu-items %}
+                        Место для меню текущей страницы.
+                    {% endblock %}
+                </ul>
+            </nav>
+        {% endblock %}
+    </div>
+    <div class="page-content">
+        {% block page-content %}
+            Место для контента текущей страницы.
+        {% endblock %}
+    </div>
 </div>
 </body>
 </html>
