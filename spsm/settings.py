@@ -134,3 +134,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = reverse_lazy("authapp:login")
 LOGIN_REDIRECT_URL = reverse_lazy("homeapp:index")
+
+TEST_RUNNER='redgreenunittest.django.runner.RedGreenDiscoverRunner'
