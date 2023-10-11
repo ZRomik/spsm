@@ -6,6 +6,7 @@
 
 {% block page-content %}
     <form method="post">
+        {% csrf_token %}
         <tabel>
             <tr>
                 <td>
