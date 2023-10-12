@@ -90,3 +90,24 @@ class TestAuthApp(TestCase):
             "Не найден созданный аккаунт!"
         )
         created_user.delete()
+
+    def test_register_user_error(self):
+        register_url = reverse_lazy("authapp:register")
+        home_url = reverse_lazy("homeapp:index")
+        register_data = {
+            "username": "testuser",
+            "password1": "testpassword123",
+            "password2": "testpassword123123"
+        }
+        response = self.client.post(register_url, register_data)
+        self.assertEqual(
+            response.status_code,
+            200,
+            "Неверный код ответа!"
+        )
+        created_user = User.objects.filter(username="testuser")
+        self.assertEqual(
+            len(created_user),
+            0,
+            "Найден юзер!"
+        )
