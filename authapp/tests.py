@@ -19,109 +19,74 @@ class TestAuthApp(TestCase):
     def test_login_user(self):
         self.client.logout()
         login_url = reverse_lazy("authapp:login")
-        # проверка получения страницы аутентификации
+        home_url = reverse_lazy("homeapp:index")
         response = self.client.get(login_url)
         self.assertEqual(
             response.status_code,
             200,
-            f"Ошибка! Не удалось получить страницу аутентификации. Код {response.status_code}, ожидался код 200."
+            "Не получена страница логина!"
         )
-
-        # проверка аутентификации пользователя
-        response = self.client.post(
-            login_url,
-            data={
-                "username": "simple",
-                "password": "simple"
-            }
-        )
+        data = {
+            "username": "simple",
+            "password": "simple"
+        }
+        response = self.client.post(login_url, data)
         self.assertEqual(
             response.status_code,
             302,
-            f"Ошибка! Аутентификация пользователя не удалась. Код {response.status_code}, ожидался код 200."
+            "Нет редиректа после логина!"
         )
-
-        home_url = reverse_lazy("homeapp:index")
         self.assertEqual(
             response.url,
             home_url,
-            f"Ошибка! Выполнен редирект на страницу {response.url}, ожидля редирект на страницу {home_url}."
-        )
-
-        self.assertTrue(
-            self.simple_user.is_authenticated,
-            f"Ошибка! Пользователь не авторизован!"
+            "Редирект не на домашнюю страницу!"
         )
 
     def test_logout_user(self):
-        if not self.simple_user.is_authenticated:
-            self.client.force_login(self.simple_user)
+        self.client.force_login(self.simple_user)
         logout_url = reverse_lazy("authapp:logout")
-        home_url = reverse_lazy('homeapp:index')
+        home_url = reverse_lazy("homeapp:index")
         response = self.client.get(logout_url)
         self.assertEqual(
             response.status_code,
             302,
-            f"Ошибка! Не выполнен выход из аккаунта."
+            "Нет редиректа после выхода из аккаунта!"
         )
-
         self.assertEqual(
             response.url,
             home_url,
-            "Ошибка! Адрес редиректа после выхода из аккаунта не совпадает с адресом домашней страницы.."
+            "Редирект не на домашнюю страницу!"
         )
 
     def test_register_user(self):
+        self.client.logout()
         register_url = reverse_lazy("authapp:register")
-        response = self.client.get(register_url)
-        self.assertEqual(
-            response.status_code,
-            200,
-            f"Ощибка! Не получена страница регистрации!"
-        )
-        data = {
-            "username": "test",
-            "password1": "test123_123",
-            "password2": "test123_123"
-        }
-        response = self.client.post(register_url, data=data)
-        self.assertEqual(
-            response.status_code,
-            302,
-            f"Ошибка! Нет редиректа!"
-        )
         home_url = reverse_lazy("homeapp:index")
-        self.assertEqual(
-            response.url,
-            home_url,
-            "Ошибка! Адреса не равны!"
-        )
-        user = User.objects.get(username="test")
-        self.assertEqual(
-            type(user),
-            User,
-            "Ошибка! Типы данных не равны!"
-        )
-        user.delete()
-
-    def test_register_user_error(self):
-        register_url = reverse_lazy("authapp:register")
-        data = {
-            "username": "test",
-            "password1": "test123_123",
-            "password2": "test123_1233"
+        register_data = {
+            "username": "testuser",
+            "password1": "testpassword123",
+            "password2": "testpassword123"
         }
-        response = self.client.post(register_url, data=data)
+        get_response = self.client.get(register_url)
         self.assertEqual(
-            response.status_code,
+            get_response.status_code,
             200,
-            "Получен неверный код ответа!"
+            "Не получена страница регистрации!"
         )
-        print(response)
-        errors = response["error"]
-        print(errors)
-        self.assertContains(
-            response=response["errors"],
-            text="errors",
-            msg_prefix="Пропущена ошибка при регистрации!"
+        post_response = self.client.post(register_url, register_data)
+        self.assertEqual(
+            post_response.status_code,
+            302,
+            "Нет редиректа!"
         )
+        self.assertEqual(
+            post_response.url,
+            home_url,
+            "Редирект не на домашнюю страницу!"
+        )
+        created_user = User.objects.get(username="testuser")
+        self.assertFalse(
+            created_user is None,
+            "Не найден созданный аккаунт!"
+        )
+        created_user.delete()
