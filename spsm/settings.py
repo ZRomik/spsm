@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 from os import getenv
 
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'homeapp',
+
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = reverse_lazy("authapp:login")
+LOGIN_REDIRECT_URL = reverse_lazy("homeapp:index")
+
+TEST_RUNNER='redgreenunittest.django.runner.RedGreenDiscoverRunner'

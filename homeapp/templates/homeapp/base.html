@@ -2,7 +2,7 @@
 <html lang="ru">
 {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'homeapp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'homeapp/css/styles.css' %}">
     <meta charset="UTF-8">
     <title>
         {% block title %}
@@ -21,7 +21,7 @@
         <ul>
             {% if user.is_authenticated %}
                 <li>
-                    <a href="#">
+                    <a href="{% url 'authapp:logout' %}">
                         выйти
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                 </li>
             {% else %}
                 <li>
-                    <a href="#">
+                    <a href="{% url 'authapp:login' %}">
                         войти
                     </a>
                 </li>
