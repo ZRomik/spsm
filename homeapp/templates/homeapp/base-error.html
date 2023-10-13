@@ -1,0 +1,20 @@
+{% extends 'homeapp/base.html' %}
+
+{% block title %}
+Ой!
+{% endblock %}
+
+{% block page-content %}
+    <h2>
+        Что-то пошло не не так
+    </h2>
+    <h1 class="error-text">
+        {% block error-code %}
+        {% endblock %}
+    </h1>
+    <div class="error-desc">
+        {% block desc %}
+        {% endblock %}
+    </div>
+    <a href="{% url 'homeapp:index' %}">Вернуться</a> на главную
+{% endblock %}
