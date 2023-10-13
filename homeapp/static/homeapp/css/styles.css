@@ -107,11 +107,13 @@ header nav ul li a:hover {
     background-color: #00963A;
 }
 
-.error-list {
-    list-style: none;
+.error-code {
+    color: red;
+    text-align: center;
 }
 
-.error-text {
-    color: red;
+.error-desc {
     font-size: 18px;
+    padding: 10px;
+    border: 1px solid red;
 }

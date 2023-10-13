@@ -1,0 +1,20 @@
+{% extends 'homeapp/base.html' %}
+{% load static %}
+{% block title %}
+Ой!
+{% endblock %}
+
+{% block page-content %}
+    <div class="error-img">
+        <img src="{% static 'homeapp/img/sad.png' %}" alt="sad" width="200" height="200">
+    </div>
+    <h1 class="error-code">
+        {% block code %}
+        {% endblock %}
+    </h1>
+    <div class="error-desc">
+        {% block desc %}
+        {% endblock %}
+    </div>
+    <a href="{% url 'homeapp:index' %}">Вернуться</a> на главную
+{% endblock %}
