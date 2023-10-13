@@ -13,3 +13,9 @@ def page_not_found_view(request, exception):
 
 def bad_request_view(request, exception):
     return render(request, 'homeapp/400.html', status=400)
+
+def page_forbidden_view(request, exception):
+    context={
+        "path": request.path
+    }
+    return render(request, 'homeapp/403.html', context, 403)
