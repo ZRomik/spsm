@@ -19,3 +19,6 @@ def page_forbidden_view(request, exception):
         "path": request.path
     }
     return render(request, 'homeapp/403.html', context, 403)
+
+def internal_error_view(request):
+    return render(request, 'homeapp/500.html')
