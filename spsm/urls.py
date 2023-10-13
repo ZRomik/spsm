@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+handler400 = "homeapp.views.bad_request_view"
 handler404 = "homeapp.views.page_not_found_view"
 
 
