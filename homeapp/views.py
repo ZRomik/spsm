@@ -10,3 +10,6 @@ def page_not_found_view(request, exception):
         "path": request.path
     }
     return render(request, 'homeapp/404.html', context=context, status=404)
+
+def bad_request_view(request, exception):
+    return render(request, 'homeapp/400.html', status=400)
