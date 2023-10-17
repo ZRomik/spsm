@@ -7,28 +7,17 @@ from django.urls import reverse_lazy
 from .models import Profile
 @permission_required("profileapp.add_profile")
 def create_user_profile_view(request: HttpRequest, id: int) -> HttpResponse:
-    if request.method == 'POST':
-        if id is None:
-            context = {
-                "text": "Неверный формиат запроса!"
-            }
-            return render(request, 'profileapp/create-error-page.html', context=context, status=404)
-        else:
-            try:
-                user = User.objects.get(pk=id)
-            except Exception:
-                context = {
-                    "text": "Не найден аккаунт пользователя!"
-                }
-                return render(request, 'profileapp/create-error-page.html', context=context, status=404)
-            else:
+    if request.method == "POST":
+        try:
+            user = User.objects.get(pk=id)
+            if user:
                 profile = Profile.objects.create(
                     user=user
                 )
                 url = reverse_lazy("homeapp:index")
                 return redirect(url)
-    elif request.method == 'GET':
-        context = {
-            "text": "Неподдерживаемый запрос."
-        }
-        return render(request, 'profileapp/create-error-page.html', context=context, status=405)
+        except Exception:
+            return HttpResponse(status=404)
+        return HttpResponse(status=404)
+    else:
+        return HttpResponse(status=405)
