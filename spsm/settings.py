@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'homeapp',
 
     'profileapp',
+
+    'authapp',
 ]
 
 MIDDLEWARE = [
