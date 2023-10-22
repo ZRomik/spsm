@@ -1,0 +1,95 @@
+{% extends 'homeapp/base.html' %}
+
+{% block title %}
+Личная карточка
+{% endblock %}
+
+{% block menu-items %}
+{% if user.is_superuser or user.is_staff or perms.change_profile or user.pk == profile.user.pk %}
+    <li>
+        <a href="#">
+            редактировать
+        </a>
+    </li>
+{% endif %}
+{% endblock %}
+
+{% block page-content %}
+    <h1>
+        Личная карточка сотрудника
+    </h1>
+    <table>
+        <tr>
+            <td>
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" alt="avatar" width="150" height="150">
+                {% endif %}
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            Фамилия:
+                        </td>
+                        <td>
+                            {% firstof profile.lastname 'Неизвестно' %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Имя:
+                        </td>
+                        <td>
+                            {% firstof profile.firstname 'Неизвестно' %}
+                        </td>
+                    </tr>
+                    {% if not profile.nmn %}
+                        <tr>
+                            <td>
+                                Отчество:
+                            </td>
+                            <td>
+                                {% firstof profile.middlename 'Неизвестно' %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>
+                            Доб. тел.:
+                        </td>
+                        <td>
+                            {% firstof profile.ext_cell 'Неизвестно' %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Раб. тел.:
+                        </td>
+                        <td>
+                            {% firstof profile.ser_cell 'Неизвестно' %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Лич. тел.:
+                        </td>
+                        <td>
+                            {% firstof profile.pri_cell 'Неизвестно' %}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {% if perms.change_profile %}
+            <tr>
+                <td>
+                    <form action="#">
+                        <button>
+                            Изменить аватар
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+{% endblock %}
