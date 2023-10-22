@@ -51,6 +51,11 @@
         {% block lef-menu %}
             <nav id="page-menu">
                 <ul>
+                    <li>
+                        <a href="{% url 'homeapp:index' %}">
+                            на главную
+                        </a>
+                    </li>
                     {% block menu-items %}
                     {% endblock %}
                 </ul>
