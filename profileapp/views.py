@@ -14,7 +14,7 @@ class ProfileDetailView(DetailView):
     template_name_suffix = "details"
     # template_name = "profileapp/profile_detail.html"
 
-# @permission_required("profileapp.add_profile")
+@permission_required("profileapp.add_profile")
 def create_new_profile_view(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == 'GET':
         try:
