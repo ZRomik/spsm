@@ -29,6 +29,7 @@ handler500 = "homeapp.views.internal_error_view"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("homeapp.urls")),
+    path("profiles/", include("profileapp.urls")),
 ]
 
 if settings.DEBUG:
