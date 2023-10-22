@@ -21,7 +21,7 @@
         <ul>
             {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'authapp:logout' %}">
+                    <a href="#">
                         выйти
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                 </li>
             {% else %}
                 <li>
-                    <a href="{% url 'authapp:login' %}">
+                    <a href="#">
                         войти
                     </a>
                 </li>
