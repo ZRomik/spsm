@@ -3,3 +3,85 @@
 {% block title %}
     Регистрация
 {% endblock %}
+
+{% block page-content %}
+    <h2>
+        Правила регистрации:
+    </h2>
+    <ul>
+        <li>
+            <h3>Имя пользователя не более 150 символов. Только буквы, цифры и символы @/./+/-/_</h3>
+        </li>
+        <li>
+            <h3>Пароль не должен быть слишком похож на другую личную информацию.</h3>
+        </li>
+        <li>
+            <h3>Пароль должен содержать как минимум 8 символов.</h3>
+        </li>
+        <li>
+            <h3>Пароль не должен быть слишком простым и распространенным.</h3>
+        </li>
+        <li>
+            <h3>Пароль не может состоять только из цифр.</h3>
+        </li>
+    </ul>
+    <br/>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div style="color: red">
+                    <b>{{ error }}</b>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    <br/>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="id_username">
+                                    Имя пользователя
+                                </label>
+                            </td>
+                            <td>
+                                <input type="text" id="id_username" name="username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="id_password1">
+                                    Пароль
+                                </label>
+                            </td>
+                            <td>
+                                <input type="password" id="id_password1" name="password1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="id_password2">
+                                    Повторите пароль
+                                </label>
+                            </td>
+                            <td>
+                                <input type="password" id="id_password2" name="password2">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <button type="submit">
+                        Зарегистрировать
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
