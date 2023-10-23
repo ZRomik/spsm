@@ -1,11 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 
-class RegisterUserView(CreateView):
+class RegisterUserView(PermissionRequiredMixin, CreateView):
+    permission_required = ("auth.add_user", "profileapp.add_profile")
     """
     Вью для регистрации аккаунта и создания профиля.
     """
