@@ -44,7 +44,10 @@ class UpdateProfileView(UserPassesTestMixin, UpdateView):
     queryset = Profile.objects.all()
 
     def test_func(self):
-        is_same_user = self.request.user.pk == self.request.GET.get("pk")
+        pk = self.kwargs["pk"]
+        if pk:
+            profile = Profile.objects.get(pk=pk)
+            is_same_user = self.request.user.pk == profile.user.pk
         is_staff = self.request.user.is_staff
         is_super = self.request.user.is_superuser
         return is_super or is_staff or is_same_user
