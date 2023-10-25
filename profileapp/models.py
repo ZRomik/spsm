@@ -10,7 +10,7 @@ class Profile(models.Model):
     firstname = models.CharField(max_length=128, null=True) # имя
     lastname = models.CharField(max_length=128, null=True) # фамилия
     middlename = models.CharField(max_length=128, null=True) # отчество
-    nmn = models.BooleanField(default=False) # флаг, что отчество отсутствует
+    nmn = models.BooleanField(default=False, null=True) # флаг, что отчество отсутствует
     ext_cell = models.CharField(max_length=128, null=True) # доб. тел.
     ser_cell = models.CharField(max_length=128, null=True) # служ. тел.
     pri_cell = models.CharField(max_length=128, null=True) # лич. тел.
