@@ -6,7 +6,7 @@ def get_avatar_filepath(instance: "Profile", filename: str) -> str:
         return f'profil/avatars/user_{instance.user.pk}/{filename}'
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) # пользователь, к которму относится профиль
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="profile") # пользователь, к которму относится профиль
     firstname = models.CharField(max_length=128, null=True) # имя
     lastname = models.CharField(max_length=128, null=True) # фамилия
     middlename = models.CharField(max_length=128, null=True) # отчество
