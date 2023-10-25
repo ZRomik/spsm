@@ -20,14 +20,16 @@
     <nav>
         <ul>
             {% if user.is_authenticated %}
+                {% if user.profile.all.0 %}
+                    <li>
+                        <a href="{% url 'profileapp:detail' pk=user.profile.all.0.pk %}">
+                            профиль
+                        </a>
+                    </li>
+                {% endif %}
                 <li>
                     <a href="{% url 'authapp:logout' %}">
                         выйти
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        профиль
                     </a>
                 </li>
                 <li>
@@ -65,6 +67,7 @@
     <div class="page-content">
         {% block page-content %}
             Место для контента текущей страницы.
+            {{ user.profile.all }}
         {% endblock %}
     </div>
 </div>
