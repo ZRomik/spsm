@@ -44,6 +44,8 @@
                     </a>
                 </li>
             {% endif %}
+            {% block top-menu-items %}
+            {% endblock %}
         </ul>
     </nav>
 
@@ -53,12 +55,7 @@
         {% block lef-menu %}
             <nav id="page-menu">
                 <ul>
-                    <li>
-                        <a href="{% url 'homeapp:index' %}">
-                            на главную
-                        </a>
-                    </li>
-                    {% block menu-items %}
+                    {% block left-menu-items %}
                     {% endblock %}
                 </ul>
             </nav>
