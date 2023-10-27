@@ -19,33 +19,6 @@
 
     <nav>
         <ul>
-            {% if user.is_authenticated %}
-                {% if user.profile.all.0 %}
-                    <li>
-                        <a href="{% url 'profileapp:detail' pk=user.profile.all.0.pk %}">
-                            профиль
-                        </a>
-                    </li>
-                {% endif %}
-                <li>
-                    <a href="{% url 'authapp:logout' %}">
-                        выйти
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'profileapp:list' %}">
-                        сотрудники
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="{% url 'authapp:login' %}">
-                        войти
-                    </a>
-                </li>
-            {% endif %}
-            {% block top-menu-items %}
-            {% endblock %}
         </ul>
     </nav>
 
