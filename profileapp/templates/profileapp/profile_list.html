@@ -1,0 +1,23 @@
+{% extends 'homeapp/base.html' %}
+
+{% block title %}
+    Сотрудники
+{% endblock %}
+
+{% block page-content %}
+    {% if not profiles %}
+        <h1>
+            Нет зарегистрированных пользователей.
+        </h1>
+    {% else %}
+        <ul>
+            {% for profile in profiles %}
+                <li>
+                    <a href="{% url 'profileapp:detail' pk=profile.pk %}">
+                        {{ profile.link_str }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

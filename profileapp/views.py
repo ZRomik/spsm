@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView
+from django.views import View
+from django.views.generic import DetailView, UpdateView, ListView
 
 from .models import Profile
 from .forms import UpdateProfileForm
@@ -51,3 +52,10 @@ class UpdateProfileView(UserPassesTestMixin, UpdateView):
         is_staff = self.request.user.is_staff
         is_super = self.request.user.is_superuser
         return is_super or is_staff or is_same_user
+
+class ProfileListView(LoginRequiredMixin, ListView):
+    """
+    Вью для отображения списка профилей сотрудников.
+    """
+    queryset = Profile.objects.all()
+    context_object_name = "profiles"

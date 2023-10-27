@@ -15,3 +15,19 @@ class Profile(models.Model):
     ser_cell = models.CharField(max_length=128, null=True) # служ. тел.
     pri_cell = models.CharField(max_length=128, null=True) # лич. тел.
     avatar = models.ImageField(upload_to=get_avatar_filepath, null=True)
+
+    @property
+    def link_str(self):
+        """
+        Возращает текст для ссылки на профиль пользователя
+        """
+        text = ""
+        if self.lastname:
+            text = self.lastname + ' '
+            if self.firstname:
+                text += self.firstname[:1].upper() + '. '
+            if self.middlename:
+                text += self.middlename[:1].upper() + '.'
+        else:
+            text = "Нет данных"
+        return text
