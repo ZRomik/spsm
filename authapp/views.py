@@ -1,16 +1,28 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import Permission
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 
-class RegisterUserView(PermissionRequiredMixin, CreateView):
-    permission_required = ("auth.add_user", "profileapp.add_profile")
+class RegisterUserView(UserPassesTestMixin, CreateView):
     """
     Вью для регистрации аккаунта и создания профиля.
     """
+
+    def test_func(self):
+        is_staff = self.request.user.is_staff
+        is_super = self.request.user.is_superuser
+        user_perm = Permission.objects.get(
+            codename="add_user"
+        )
+        profile_perm = Permission.objects.get(
+            codename="add_profile"
+        )
+        return is_staff or is_super or (user_perm and profile_perm)
+
     def get(self, request: HttpRequest) -> HttpResponse:
         return render(request, "authapp/register.html")
 
