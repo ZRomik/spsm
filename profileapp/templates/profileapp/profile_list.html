@@ -4,6 +4,16 @@
     Сотрудники
 {% endblock %}
 
+{% if perms.add_user and perms.add_profile %}
+    {% block top-menu-items %}
+        <li>
+            <a href="{% url 'authapp:register' %}">
+                регистрация
+            </a>
+        </li>
+    {% endblock %}
+{% endif %}
+
 {% block page-content %}
     {% if not profiles %}
         <h1>
