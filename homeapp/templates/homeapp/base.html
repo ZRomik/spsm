@@ -26,15 +26,15 @@
                             профиль
                         </a>
                     </li>
-                <li>
-                    <a href="{% url 'profileapp:list' %}">
-                        сотрудники
-                    </a>
-                </li>
                 {% endif %}
                 <li>
                     <a href="{% url 'authapp:logout' %}">
                         выйти
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'profileapp:list' %}">
+                        сотрудники
                     </a>
                 </li>
             {% else %}
