@@ -22,7 +22,7 @@
             {% block common-top-menu-items %}
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="#">
+                        <a href="{% url 'accountapp:logout' %}">
                             выйти
                         </a>
                     </li>
