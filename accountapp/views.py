@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from .models import Profile
 
 
@@ -24,3 +24,8 @@ class RegisterUserView(PermissionRequiredMixin, CreateView):
             return redirect(url)
         else:
             return render(request, "accountapp/register.html", context={"form": form})
+
+class ProfileDetailsView(LoginRequiredMixin, DetailView):
+    model = Profile
+    context_object_name = "profile"
+    queryset = Profile.objects.all()
