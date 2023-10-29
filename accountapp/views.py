@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from .models import Profile
 
 
@@ -29,3 +29,7 @@ class ProfileDetailsView(LoginRequiredMixin, DetailView):
     model = Profile
     context_object_name = "profile"
     queryset = Profile.objects.all()
+
+class ProfilesListView(ListView):
+    model = Profile
+    context_object_name = "profiles"
