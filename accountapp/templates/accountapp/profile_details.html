@@ -1,0 +1,83 @@
+{% extends "homeapp/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% if perms.change_user %}
+    {% block custom-top-menu-items %}
+        <li>
+            <a href="#">
+                редактировать
+            </a>
+        </li>
+    {% endblock %}
+{% endif %}
+
+{% block page-content %}
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            {% if profile.avatar %}
+                                <img src="{{ profile.avatar.url }}" alt="avatar" width="150" height="150">
+                            {% else %}
+                                <img src="{% static 'accountapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Фамилия:
+                                    </td>
+                                    <td>
+                                        {% firstof profile.lastname 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Имя:
+                                    </td>
+                                    <td>
+                                        {% firstof profile.firstname 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                {% if not profile.nmn %}
+                                    <tr>
+                                        <td>
+                                            Отчество:
+                                        </td>
+                                        <td>
+                                            {% firstof profile.middlename 'Нет данных' %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>
+                                        Внут. тел.:
+                                    </td>
+                                    <td>
+                                        {% firstof profile.ext_phone 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Лич. тел.:
+                                    </td>
+                                    <td>
+                                        {% firstof profile.pri_phone 'Нет данных' %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
