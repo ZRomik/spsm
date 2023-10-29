@@ -117,3 +117,10 @@ header nav ul li a:hover {
     padding: 10px;
     border: 1px solid red;
 }
+
+.error-text {
+    font-size: 18px;
+    padding: 5px;
+    color: red;
+    font-weight: bold;
+}
