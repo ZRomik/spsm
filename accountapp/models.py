@@ -16,3 +16,14 @@ class Profile(models.Model):
     pri_phone = models.CharField(max_length=128, null=True)
     avatar = models.ImageField(upload_to=get_profile_avatar_filepath, null=True)
     email = models.CharField(max_length=128, null=True)
+
+    @property
+    def link_str(self):
+        text = 'Нет данных'
+        if self.lastname:
+            text = self.lastname
+            if self.firstname:
+                text.join([" ", self.firstname])
+            if self.middlename:
+                text.join([" ", self.middlename])
+        return text
