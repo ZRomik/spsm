@@ -22,18 +22,18 @@
             {% block common-top-menu-items %}
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'accountapp:logout' %}">
+                        <a href="#">
                             выйти
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'accountapp:list' %}">
+                        <a href="#">
                             сотрудники
                         </a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="{% url "accountapp:login" %}">
+                        <a href="#">
                             войти
                         </a>
                     </li>
