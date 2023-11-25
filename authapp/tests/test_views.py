@@ -108,7 +108,7 @@ class RegisterUserViewTestCase(TestCase):
         self.advance_user.user_permissions.add(add_user_perm)
         self.advance_user.save()
 
-    def test_register_user_no_perm(self):
+    def test_register_user_by_user_no_perm(self):
         self.client.force_login(self.simple_user)
         self.assertFalse(
             self.simple_user.has_perm("auth.add_user"),
@@ -127,7 +127,7 @@ class RegisterUserViewTestCase(TestCase):
             msg_prefix="Нет сообщения об ошибке!"
         )
 
-    def test_register_user_has_perm(self):
+    def test_register_user_by_user_has_perm(self):
         self.client.force_login(self.advance_user)
         self.assertTrue(
             self.advance_user.has_perm("auth.add_user"),
