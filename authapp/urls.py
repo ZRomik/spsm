@@ -1,5 +1,5 @@
-from django.contrib.auth.views import LoginView
-from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import path, reverse_lazy
 
 app_name = "authapp"
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
         ),
         name="login"
     ),
+    path("logout/", LogoutView.as_view(next_page=reverse_lazy("homeapp:index")), name="logout")
 ]
