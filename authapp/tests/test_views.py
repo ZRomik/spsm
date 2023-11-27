@@ -24,7 +24,7 @@ class LoginViewTestCase(TestCase):
         super().tearDownClass()
         cls.user.delete()
 
-    def test_login_user(self):
+    def test_user_login(self):
         self.client.logout()
         auth_url = reverse_lazy("authapp:login")
         response = self.client.post(auth_url, self.auth_data)
