@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -30,11 +30,16 @@ class RegisterUserView(PermissionRequiredMixin, View):
             url = reverse_lazy("homeapp:index")
             return redirect(url)
 
-class DeleteUserView(PermissionRequiredMixin, DeleteView):
-    permission_required = "auth.delete_user"
+class DeleteUserView(UserPassesTestMixin, DeleteView):
     template_name = "authapp/confirm_delete_user.html"
     context_object_name = "account"
     queryset = User.objects.all()
+
+    def test_func(self):
+        is_staff = self.request.user.is_staff
+        is_superuser = self.request.user.is_superuser
+        has_delete_perm = self.request.user.has_perms(["auth.delete_user"])
+        return is_superuser or is_staff or has_delete_perm
 
     def post(self, request, *args, **kwargs):
         id = kwargs["pk"]
