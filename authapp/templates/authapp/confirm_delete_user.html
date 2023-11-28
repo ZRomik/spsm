@@ -1,0 +1,26 @@
+{% extends 'homeapp/base.html' %}
+
+{% block title %}
+    Подтвердите удаление
+{% endblock %}
+
+{% block page-content %}
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+                <li class="error-text">
+                    {{ error }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <h2>
+            Вы действительно хотите удалить учетную запись {{ account.usernasme }}?
+        </h2>
+        <button type="submit">
+            Удалить
+        </button>
+    </form>
+{% endblock %}
