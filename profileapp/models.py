@@ -9,7 +9,7 @@ class Avatar(models.Model):
     """
     Модель описывает аватар пользователя
     """
-    avatar = models.ImageField(upload_to=get_avatar_file_path, null=True)
+    image = models.ImageField(upload_to=get_avatar_file_path, null=True)
 
     class Meta:
         db_table = "avatars"
