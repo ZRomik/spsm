@@ -13,3 +13,13 @@ class Avatar(models.Model):
 
     class Meta:
         db_table = "avatars"
+
+class Phone(models.Model):
+    """
+    Модель описывает номер телефона
+    """
+    desc = models.CharField(max_length=128)
+    num = models.CharField(max_length=128)
+
+    class Meta:
+        db_table = "phones"
