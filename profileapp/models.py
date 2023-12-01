@@ -23,3 +23,13 @@ class Phone(models.Model):
 
     class Meta:
         db_table = "phones"
+
+class Email(models.Model):
+    """
+    Модель описывает адрес эл. почты.
+    """
+    desc = models.CharField(max_length=128)
+    addr = models.EmailField(max_length=128)
+
+    class Meta:
+        db_table = "emails"
