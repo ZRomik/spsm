@@ -28,8 +28,8 @@ class Email(models.Model):
     """
     Модель описывает адрес эл. почты.
     """
-    desc = models.CharField(max_length=128)
-    addr = models.EmailField(max_length=128)
+    desc = models.CharField(max_length=128, null=True)
+    addr = models.EmailField(max_length=128, null=True)
 
     class Meta:
         db_table = "emails"
