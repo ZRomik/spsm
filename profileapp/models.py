@@ -10,6 +10,7 @@ class Avatar(models.Model):
     Модель описывает аватар пользователя
     """
     image = models.ImageField(upload_to=get_avatar_file_path, null=True)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="avatar", null=True)
 
     class Meta:
         db_table = "avatars"
@@ -20,6 +21,7 @@ class Phone(models.Model):
     """
     desc = models.CharField(max_length=128, null=True)
     num = models.CharField(max_length=128, null=True)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, null=True, related_name="phones")
 
     class Meta:
         db_table = "phones"
@@ -30,6 +32,7 @@ class Email(models.Model):
     """
     desc = models.CharField(max_length=128, null=True)
     addr = models.EmailField(max_length=128, null=True)
+    profile = models.ForeignKey("Profile", null=True, related_name="emails", on_delete=models.CASCADE)
 
     class Meta:
         db_table = "emails"
