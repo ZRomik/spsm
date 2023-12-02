@@ -18,8 +18,8 @@ class Phone(models.Model):
     """
     Модель описывает номер телефона
     """
-    desc = models.CharField(max_length=128)
-    num = models.CharField(max_length=128)
+    desc = models.CharField(max_length=128, null=True)
+    num = models.CharField(max_length=128, null=True)
 
     class Meta:
         db_table = "phones"
