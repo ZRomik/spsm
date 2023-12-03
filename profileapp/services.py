@@ -1,6 +1,6 @@
 from .models import Profile
 
-def create_profile(user) -> Profile:
-    return Profile.objects.create(
+def get_profile(user) -> Profile:
+    return Profile.objects.get_or_create(
         user=user
-    )
+    )[0]
