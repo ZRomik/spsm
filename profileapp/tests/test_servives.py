@@ -24,7 +24,7 @@ class CreateProfileTestCase(TestCase):
             profile.delete()
 
     def test_create_profile(self):
-        profile = get_profile(self.user)
+        profile = get_profile(self.user.pk)
         self.assertIsNotNone(
             profile,
             "Профиль не создан!"
