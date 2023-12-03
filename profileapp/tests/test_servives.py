@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from ..services import create_profile
+from ..services import get_profile
 from ..models import Profile
 from django.test import TestCase
 
@@ -24,7 +24,7 @@ class CreateProfileTestCase(TestCase):
             profile.delete()
 
     def test_create_profile(self):
-        profile = create_profile(self.user)
+        profile = get_profile(self.user)
         self.assertIsNotNone(
             profile,
             "Профиль не создан!"
