@@ -1,0 +1,132 @@
+{% extends 'homeapp/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Профиль {{ profile.fio }}
+{% endblock %}
+
+{% if perms.change_profile %}
+    {% block custom-top-menu-items %}
+        <li>
+            <a href="#">
+                редактировать
+            </a>
+        </li>
+    {% endblock %}
+{% endif %}
+
+{% block page-content %}
+    <h1>
+        Профиль {{ profile.fio }}
+    </h1>
+    <table>
+        <tr>
+            <td>
+                {% if profile.avatar.image %}
+                    <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                {% else %}
+                    <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                {% endif %}
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td align="center" valign="center">
+                            <img src="{% static 'profileapp/img/profile.png' %}" alt="profile">
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Фамилия
+                                    </td>
+                                    <td>
+                                        {% firstof profile.lastname 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Имя
+                                    </td>
+                                    <td>
+                                        {% firstof profile.firstname 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                {% if not profile.nmn %}
+                                    <tr>
+                                        <td>
+                                            Отчество
+                                        </td>
+                                        <td>
+                                            {% firstof profile.middlename 'Нет данных' %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="center">
+                            <img src="{% static 'profileapp/img/phone.png' %}" alt="phone">
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Внут. тел.
+                                    </td>
+                                    <td>
+                                        {% firstof profile.ext_phone 'Нет данных' %}
+                                    </td>
+                                    {% if profile.phones %}
+                                        {% for phone in profile.phones.all %}
+                                            <tr>
+                                                <td>
+                                                    {{ phone.desc }}
+                                                </td>
+                                                <td>
+                                                    {{ phone.num }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="center">
+                            <img src="{% static 'profileapp/img/email.png' %}" alt="email">
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Раб. почта
+                                    </td>
+                                    <td>
+                                        {% firstof profile.work_mail 'Нет данных' %}
+                                    </td>
+                                </tr>
+                                {% if profile.emails %}
+                                    {% for email in profile.emails.all %}
+                                        <tr>
+                                            <td>
+                                                {{ email.desc }}
+                                            </td>
+                                            <td>
+                                                <a href="mailto: {{ email.addr }}">
+                                                    {{ email.addr }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
