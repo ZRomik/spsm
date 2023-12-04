@@ -10,5 +10,24 @@
     <h1>
         Редактирование профиля {{ profile.fio }}
     </h1>
+    <table>
+        <tr>
+            <td>
+                {% if profile.avatar.image %}
+                    <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                {% else %}
+                    <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                {% endif %}
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
 
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 {% endblock %}
