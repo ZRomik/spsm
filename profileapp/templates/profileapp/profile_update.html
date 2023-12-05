@@ -26,6 +26,8 @@
                     {% if perms.change_avatar %}
                         <tr>
                             <td align="center">
+                                Максимальный размер фвйла 1 Мб.
+
                                 <form action="#">
                                     <button>
                                         Загрузить
@@ -41,12 +43,95 @@
                     {% csrf_token %}
                     <table>
                         <tr>
-                            <td>
-
+                            <td align="center">
+                                <table>
+                                    <tr>
+                                        <td align="center" valign="center">
+                                            <img src="{% static 'profileapp/img/profile.png' %}" alt="profile" width="16" height="16">
+                                        </td>
+                                        <td align="center">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="id_lastname">
+                                                            Фамилия
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="id_lastname" name="lastname" required value="{% firstof profile,lastname 'Нет данных' %}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="id_firstname">
+                                                            Имя
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="id_firstname" name="firstname" required value="{% firstof profile.firstname 'Нет данных' %}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="id_middlename">
+                                                            Отчество
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="id_middlename" name="middlename" value="{% firstof profile.middlename '' %}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="id_nmn">
+                                                            Без отчества
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" id="id_nmn" value="{% if profile.nmn %} checked {% else %} '' {% endif %}">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="center">
+                                            <img src="{% static 'profileapp/img/phone.png' %}" alt="phone" width="16" height="16">
+                                        </td>
+                                        <td align="center">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="id_ext_phone">
+                                                            Раб. тел.
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="id_ext_phone" value="{% profile.rxt_phone '' %}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#">
+                                                            Добавить телефон
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="center">
+                                            <img src="{% static 'profileapp/img/email.png' %}" alt="email">
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td align="center">
                                 <button type="submit">
                                     Сохранить
                                 </button>
