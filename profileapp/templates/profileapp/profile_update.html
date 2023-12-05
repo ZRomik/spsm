@@ -3,30 +3,57 @@
 {% load static %}
 
 {% block title %}
-    Редактирование профиля {{ profile.fio}}
+    Редактирование профиля {{ profile.fio }}
 {% endblock %}
 
 {% block page-content %}
     <h1>
-        Редактирование профиля {{ profile.fio }}
+    Редактирование профиля {{ profile.fio }}
     </h1>
     <table>
         <tr>
             <td>
-                {% if profile.avatar.image %}
-                    <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
-                {% else %}
-                    <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
-                {% endif %}
-            </td>
-            <td>
                 <table>
                     <tr>
                         <td>
-
+                            {% if profile.avatar.image %}
+                                <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                            {% else %}
+                                <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                            {% endif %}
                         </td>
                     </tr>
+                    {% if perms.change_avatar %}
+                        <tr>
+                            <td align="center">
+                                <form action="#">
+                                    <button>
+                                        Загрузить
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
+            </td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit">
+                                    Сохранить
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </td>
         </tr>
     </table>
