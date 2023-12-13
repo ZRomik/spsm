@@ -17,74 +17,31 @@
         <table>
             <tr>
                 <td>
+                    {% if profile.avatar.image %}
+                        <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                    {% else %}
+                        <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                    {% endif %}
+                </td>
+                <td>
                     <table>
                         <tr>
-                            <td align="center">
-                                {% if profile.avatar.image %}
-                                    <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
-                                {% else %}
-                                    <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
-                                {% endif %}
+                            <td align="center" valign="center">
+                                <img src="{% static 'profileapp/img/profile.png' %}" alt="profile" width="16" height="16">
                             </td>
-                            <td align="center">
+                            <td>
                                 <table>
-                                    <tr>
-                                        <td align="center" valign="center">
-                                            <img src="{% static 'profileapp/img/profile.png' %}" alt="profile" width="16" height="16">
-                                        </td>
-                                        <td>
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <label for="id_lastname">
-                                                            Фамилия
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" id="id_lastname" name="lastname" value="{% firstof profile.lastname '' %}">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="id_firstname">
-                                                            Имя
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" id="id_firstname" name="firstname" value="{% firstof profile.firstname '' %}">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="id_middlename">
-                                                            Отчество
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" id="id_middlename" name="middlename" value="{% firstof profile.middlename '' %}">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
+
                                 </table>
                             </td>
                         </tr>
+                        <tr>
+
+                        </tr>
+                        <tr>
+
+                        </tr>
                     </table>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    {% if perms.change_avatar %}
-                        <button type="submit" name="_load">
-                            Загрузить
-                        </button>
-                    {% endif %}
-                </td>
-                <td align="center">
-                    <button type="submit" name="_save">
-                        Сохранить
-                    </button>
                 </td>
             </tr>
         </table>
