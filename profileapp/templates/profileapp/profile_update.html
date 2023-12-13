@@ -31,7 +31,46 @@
                             </td>
                             <td>
                                 <table>
-
+                                    <tr>
+                                        <td>
+                                            <label for="id_lastname">
+                                                Фамилия
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_lastname" name="lastname" value="{% firstof profile.lastname '' %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_firstname">
+                                                Имя
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_firstname" name="firstname" value="{% firstof profile.firstname '' %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_middlename">
+                                                Отчество
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_middlename" name="middlename" value="{% firstof profile.middlename '' %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_nmn">
+                                                Нет отчества
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="id_nmn" name="nmn" value="{% if profile.nmn %} 'checked' {% else %} '' {% endif %}">
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
@@ -41,7 +80,45 @@
                             </td>
                             <td>
                                 <table>
-
+                                    <tr>
+                                        <td>
+                                            <label for="id_ext_phone">
+                                                Внут. тел.
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_ext_phone" name="ext_phone" value="{% firstof profile.ext_phone '' %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_work_phone">
+                                                Служ. тел.
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_work_phone" name="work_phone" value="{% firstof profile.work_phone %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="id_self_phone">
+                                                Лич. тел.
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_self_phone" name="self_phone" value="{% firstof profile.self_phone %}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="submit" name="_phone">
+                                                Добавить номер
+                                            </button>
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
@@ -51,7 +128,16 @@
                             </td>
                             <td>
                                 <table>
-
+                                    <tr>
+                                        <td>
+                                            <label for="id_work_mail">
+                                                Раб. почта
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="id_work_mail" name="work_mail" value="{% firstof profile.work_mail '' %}">
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
