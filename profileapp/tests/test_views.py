@@ -138,5 +138,5 @@ class UpdateProfileViewTestCase(TestCase):
         self.assertIn(
             "detail",
             response.url,
-            "Нет строки 'detail'!"
+            "Нет строки 'detail' в адресе!"
         )
