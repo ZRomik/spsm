@@ -74,7 +74,8 @@ class UpdateProfileViewTestCase(TestCase):
         super().tearDownClass()
         cls.advance_user.delete()
         cls.simple_user.delete()
-        cls.profile.delete()
+        for profile in Profile.objects.all():
+            profile.delete()
 
     def setUp(self) -> None:
         perm = Permission.objects.get(
@@ -90,7 +91,7 @@ class UpdateProfileViewTestCase(TestCase):
             "ext_phone": "123",
             "work_phone": "123",
             "self_phone": "123",
-            "": "_save"
+            "_save": ""
 
         }
 
@@ -124,11 +125,18 @@ class UpdateProfileViewTestCase(TestCase):
             msg_prefix="Нет заголовка страницы!"
         )
         response = self.client.post(
-            update_url,
-            self.update_data_full,
+            path=update_url,
+            data=self.update_data_full,
+            extra="_save"
+
         )
         self.assertEqual(
             response.status_code,
-            500,
+            302,
             "Неверный код ответа!"
+        )
+        self.assertIn(
+            "detail",
+            response.url,
+            "Нет строки 'detail'!"
         )
