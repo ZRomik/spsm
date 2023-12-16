@@ -36,7 +36,7 @@ class UpdateProfileView(PermissionRequiredMixin, UpdateView):
             pass
         elif "phone" in request.POST:
             pass
-        elif "email" in request.POST:
+        elif "_email" in request.POST:
             pass
         elif "_save" in request.POST:
             form = UpdateProfileForm(request.POST)
