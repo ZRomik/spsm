@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'homeapp',
 
     'authapp',
+
+    "profileapp",
 ]
 
 MIDDLEWARE = [
@@ -133,4 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = reverse_lazy("homeapp:index")
+LOGIN_URL = reverse_lazy("authapp:login")
 TEST_RUNNER='redgreenunittest.django.runner.RedGreenDiscoverRunner'

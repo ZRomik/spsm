@@ -62,8 +62,35 @@
         {% endblock %}
     </div>
     <div class="page-content">
+        <h1>
+            {% block page-content-title %}
+            {% endblock %}
+        </h1>
+        {% if form.errors %}
+            <div>
+                <span class="error-text">
+                    При обработке запроса найдены ошибки.
+                </span>
+                <ul>
+                {% if form.non_field_errors %}
+                    {% for non_field_error in form.non_field_errors %}
+                        <li class="error-text">
+                            {{ non_field_error }}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li class="error-text">
+                                {{ field.label }}: {{ error }}
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                </ul>
+            </div>
+        {% endif %}
         {% block page-content %}
-            Место для контента текущей страницы.
         {% endblock %}
     </div>
 </div>
