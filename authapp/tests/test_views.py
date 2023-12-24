@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Permission
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse_lazy
 
@@ -251,3 +252,8 @@ class DeleteUserViewTestCase(TestCase):
             "/",
             "Неверный адрес редирекита!"
         )
+        with self.assertRaises(
+            expected_exception=ObjectDoesNotExist,
+            msg="Аккаунт не укдален!"
+        ):
+            user = User.objects.get(username="test")
