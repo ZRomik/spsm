@@ -46,10 +46,10 @@ class Profile(models.Model):
     firstname = models.CharField(max_length=128, null=True)
     middlename = models.CharField(max_length=128, null=True)
     nmn = models.BooleanField(default=False)
-    work_mail = models.EmailField(max_length=128, null=True)
-    ext_phone = models.CharField(max_length=128, null=True)
-    work_phone = models.CharField(max_length=128, null=True)
-    self_phone = models.CharField(max_length=128, null=True)
+    work_mail = models.EmailField(max_length=128, null=True, blank=True)
+    ext_phone = models.CharField(max_length=128, null=True, blank=True)
+    work_phone = models.CharField(max_length=128, null=True, blank=True)
+    self_phone = models.CharField(max_length=128, null=True, blank=True)
 
     @property
     def fio(self):
