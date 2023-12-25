@@ -9,7 +9,7 @@
 {% if perms.change_profile %}
     {% block custom-top-menu-items %}
         <li>
-            <a href="#">
+            <a href="{% url 'profileapp:update' pk=profile.pk %}">
                 редактировать
             </a>
         </li>
