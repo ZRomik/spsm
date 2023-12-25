@@ -22,27 +22,22 @@
             {% block common-top-menu-items %}
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="#">
-                            выйти
+                        <a href="{% url 'profileapp:detail' pk=user.pk %}">
+                            профиль
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            сотрудники
+                        <a href="{% url 'authapp:logout' %}">
+                            выйти
                         </a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="#">
+                        <a href="{% url 'authapp:login' %}">
                             войти
                         </a>
                     </li>
                 {% endif %}
-                <li>
-                    <a href="#">
-                        о проекте
-                    </a>
-                </li>
             {% endblock %}
             {% block custom-top-menu-items %}
             {% endblock %}
