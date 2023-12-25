@@ -42,14 +42,14 @@ class Profile(models.Model):
     Модель описывает профиль пользователя
     """
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    lastname = models.CharField(max_length=128, null=True)
-    firstname = models.CharField(max_length=128, null=True)
-    middlename = models.CharField(max_length=128, null=True)
+    lastname = models.CharField(max_length=128, null=True, verbose_name="Фамилия")
+    firstname = models.CharField(max_length=128, null=True, verbose_name="Имя")
+    middlename = models.CharField(max_length=128, null=True, verbose_name="Отчество")
     nmn = models.BooleanField(default=False)
-    work_mail = models.EmailField(max_length=128, null=True, blank=True)
-    ext_phone = models.CharField(max_length=128, null=True, blank=True)
-    work_phone = models.CharField(max_length=128, null=True, blank=True)
-    self_phone = models.CharField(max_length=128, null=True, blank=True)
+    work_mail = models.EmailField(max_length=128, null=True, blank=True, verbose_name="Раб. почта")
+    ext_phone = models.CharField(max_length=128, null=True, blank=True, verbose_name="Внут. тел.")
+    work_phone = models.CharField(max_length=128, null=True, blank=True, verbose_name="Служ. тел.")
+    self_phone = models.CharField(max_length=128, null=True, blank=True, verbose_name="Лич. тел.")
 
     @property
     def fio(self):
