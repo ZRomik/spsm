@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+def get_avatar_path(instance: "Avatar", filename: str) -> str:
+    if filename:
+        return f"avatars/{instance.pk}/{filename}"
+
 class Profile(models.Model):
     """
     Модель описывает профиль пользователя
@@ -17,3 +21,13 @@ class Profile(models.Model):
 
     class Meta:
         db_table = "profiles"
+
+class Avatar(models.Model):
+    """
+    Модель описывает аватар профиля пользователя
+    """
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="avatar") # ссылка на профиль пользователя
+    image = models.ImageField(null=True, upload_to=get_avatar_path) # аватар
+
+    class Meta:
+        db_table = "avatars"
