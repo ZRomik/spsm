@@ -12,7 +12,7 @@ def get_user_profile(id: int):
         profile = Profile.objects.get_or_create(user = user)[0]
     except:
         pass
-    return profile is not None, profile if profile else None
+    return profile is not None, profile
 
 def get_avatar(profile: Profile) -> Avatar:
     avatar = None
