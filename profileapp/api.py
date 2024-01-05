@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Profile, Avatar
 """
 В этом файле собраны вспомогательные функции для работы приложения.
 """
@@ -13,3 +13,9 @@ def get_user_profile(id: int):
     except:
         pass
     return profile is not None, profile if profile else None
+
+def get_avatar(profile: Profile) -> Avatar:
+    avatar = None
+    if profile:
+        avatar = Avatar.objects.get_or_create(profile=profile)[0]
+    return avatar is not None, avatar
