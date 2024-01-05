@@ -61,10 +61,24 @@
             {% block page-content-title %}
             {% endblock %}
         </h1>
+        {% if errors %}
+            <div>
+                <span class="error-text">
+                    Ошибки при обработке запроса.
+                </span>
+                <ul>
+                    {% for error in errors %}
+                        <li class="error-text">
+                            {{ error }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         {% if form.errors %}
             <div>
                 <span class="error-text">
-                    При обработке запроса найдены ошибки.
+                    Ошибки при обработке запроса.
                 </span>
                 <ul>
                 {% if form.non_field_errors %}
