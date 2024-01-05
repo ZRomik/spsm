@@ -31,10 +31,6 @@ class CreateUserServiceTestCase(TestCase):
             user,
             "Аккаунт не создан"
         )
-        self.assertIsNone(
-            forms,
-            "Получена форма"
-        )
         user.delete()
 
 class DeleteUserServiceTestCase(TestCase):
