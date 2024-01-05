@@ -9,7 +9,7 @@ def create_user(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
         user = form.save()
-    return user is not None, user, form if not user else None
+    return user is not None, user, form
 
 def delete_user(user_id):
     user = User.objects.get(pk=user_id)
