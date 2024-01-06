@@ -25,11 +25,11 @@ class Profile(models.Model):
     def fio(self):
         text = "Нет данных"
         if self.lastname:
-            text = self.lastname
+            text = self.lastname.capitalize()
             if self.firstname:
-                text = "".join([text, self.firstname[:1].upper(), "."])
+                text = "".join([text, " ", self.firstname[:1].upper(), "."])
                 if self.middlename:
-                    text = "".join([" ", text, self.middlename[:1].upper(), "."])
+                    text = "".join([text, " ", self.middlename[:1].upper(), "."])
         return text
 
 
