@@ -11,7 +11,8 @@ class Profile(models.Model):
     """
     Модель описывает профиль пользователя
     """
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # ссылка на аккаунт пользователя
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
+                             related_name="profile")  # ссылка на аккаунт пользователя
     firstname = models.CharField(max_length=128, verbose_name="Имя")  # реальное имя
     lastname = models.CharField(max_length=128, verbose_name="Фамилия")  # фамилия
     middlename = models.CharField(max_length=128, verbose_name="Отчество", null=True,
@@ -31,7 +32,6 @@ class Profile(models.Model):
                 if self.middlename:
                     text = "".join([text, " ", self.middlename[:1].upper(), "."])
         return text
-
 
     class Meta:
         db_table = "profiles"
