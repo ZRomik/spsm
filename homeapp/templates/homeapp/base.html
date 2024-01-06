@@ -11,97 +11,92 @@
     </title>
 </head>
 <body>
-<header>
+    <header>
 
-    <a href="{% url 'homeapp:index' %}" class="logo">
-        <img src="{% static 'homeapp/img/logo.png' %}" alt="logo">
-    </a>
+        <a href="{% url 'homeapp:index' %}" class="logo">
+            <img src="{% static 'homeapp/img/logo.png' %}" alt="logo">
+        </a>
 
-    <nav>
-        <ul>
-            {% block common-top-menu-items %}
-                {% if user.is_authenticated %}
-                    <li>
-                        <a href="#">
-                            профиль
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'authapp:logout' %}">
-                            выйти
-                        </a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a href="{% url 'authapp:login' %}">
-                            войти
-                        </a>
-                    </li>
-                {% endif %}
-            {% endblock %}
-            {% block custom-top-menu-items %}
-            {% endblock %}
-        </ul>
-    </nav>
-
-</header>
-<div class="bottom-area">
-    <div class="left-menu">
-        {% block lef-menu %}
-            <nav id="page-menu">
-                <ul>
-                    {% block left-menu-items %}
-                    {% endblock %}
-                </ul>
-            </nav>
-        {% endblock %}
-    </div>
-    <div class="page-content">
-        <h1>
-            {% block page-content-title %}
-            {% endblock %}
-        </h1>
-        {% if errors %}
-            <div>
-                <span class="error-text">
-                    Ошибки при обработке запроса.
-                </span>
-                <ul>
-                    {% for error in errors %}
-                        <li class="error-text">
-                            {{ error }}
+        <nav>
+            <ul>
+                {% block common-top-menu-items %}
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="#">
+                                профиль
+                            </a>
                         </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        {% if form.errors %}
-            <div>
-                <span class="error-text">
-                    Ошибки при обработке запроса.
-                </span>
-                <ul>
-                {% if form.non_field_errors %}
-                    {% for non_field_error in form.non_field_errors %}
-                        <li class="error-text">
-                            {{ non_field_error }}
+                        <li>
+                            <a href="{% url 'authapp:logout' %}">
+                                выйти
+                            </a>
                         </li>
-                    {% endfor %}
-                {% else %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <li class="error-text">
-                                {{ field.label }}: {{ error }}
-                            </li>
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
-                </ul>
-            </div>
-        {% endif %}
-        {% block page-content %}
-        {% endblock %}
+                    {% else %}
+                        <li>
+                            <a href="{% url 'authapp:login' %}">
+                                войти
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endblock %}
+                {% block custom-top-menu-items %}
+                {% endblock %}
+            </ul>
+        </nav>
+    </header>
+    <div class="bottom-area">
+        <div class="left-menu">
+            {% block lef-menu %}
+                <nav id="page-menu">
+                    <ul>
+                        {% block left-menu-items %}
+                        {% endblock %}
+                    </ul>
+                </nav>
+            {% endblock %}
+        </div>
+        <div class="page-content">
+            <h1>
+                {% block page-content-title %}
+                {% endblock %}
+            </h1>
+            {% if errors or form.errors %}
+                <div>
+                    <span class="error-text">
+                        Ошибки при выполнении запроса
+                    </span>
+                </div>
+                <div>
+                    <ul>
+                        {% if errors %}
+                            {% for error in errors %}
+                                <li class="error-text">
+                                    {{ error }}
+                                </li>
+                            {% endfor %}
+                        {% elif form.errors %}
+                            {% if form.non_field_errors %}
+                                {% for non_field_error in form.non_field_errors %}
+                                    <li class="error-text">
+                                        {{ non_field_error }}
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li class="error-text">
+                                            {{ field.label }}: {{ error }}
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% block page-content %}
+            {% endblock %}
+        </div>
     </div>
-</div>
 </body>
 </html>
