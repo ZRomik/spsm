@@ -22,6 +22,17 @@ class Profile(models.Model):
     selfphone = models.CharField(max_length=128, null=True, blank=True, verbose_name="Лич. тел.")  # лич. тел.
     workmail = models.EmailField(max_length=128, null=True, blank=True, verbose_name="Раб. почта")  # раб. эл. почта
 
+    def fio(self):
+        text = "Нет данных"
+        if self.lastname:
+            text = self.lastname
+            if self.firstname:
+                text = "".join([text, self.firstname[:1].upper(), "."])
+                if self.middlename:
+                    text = "".join([" ", text, self.middlename[:1].upper(), "."])
+        return text
+
+
     class Meta:
         db_table = "profiles"
 
