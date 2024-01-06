@@ -3,15 +3,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from ..models import Profile
 
-
 """
 Тестирование моделей приложения 
 """
+
 
 class ProfileModelTestCase(TestCase):
     """
     Тестирование модели Profile
     """
+
     def setUp(self) -> None:
         super().setUp()
         self.user = User.objects.create_user(
@@ -24,7 +25,6 @@ class ProfileModelTestCase(TestCase):
         self.user.delete()
         for profile in Profile.objects.all():
             profile.delete()
-
 
     def test_profile_create_profile(self):
         profile = Profile.objects.create(
@@ -41,8 +41,8 @@ class ProfileModelTestCase(TestCase):
         )
         profile.delete()
         with self.assertRaises(
-            expected_exception=ObjectDoesNotExist,
-            msg="Профиль не удален!"
+                expected_exception=ObjectDoesNotExist,
+                msg="Профиль не удален!"
         ):
             profile = Profile.objects.get(
                 user=self.user
