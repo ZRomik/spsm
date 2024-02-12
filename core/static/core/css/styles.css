@@ -1,0 +1,88 @@
+@font-face {
+	font-family: 'GolosUIWebRegular';
+	src:
+		url('../font/golos-text_regular.woff2') format('woff2'),
+		url('../font/golos-text_regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	background-color: white;
+	font-family: GolosUIWebRegular;
+
+}
+
+.menu {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	align-items: center;
+	background-color: white;
+}
+
+.menu-link {
+	display: block;
+	color: green;
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 1em;
+	white-space: nowrap;
+}
+
+.menu-link:hover {
+	background-color: green;
+	color: yellow;
+}
+
+.menu-link:focus {
+	background-color: green;
+	color: yellow;
+	outline: none;
+}
+
+.submenu {
+	display: none;
+	flex-direction: column;
+	list-style: none;
+	padding: 0;
+	position: absolute;
+	background-color: white;
+}
+
+.menu-item {
+	position: relative;
+	white-space: nowrap;
+	width: 180px;
+	text-align: left;
+}
+
+.menu-item:hover > .submenu {
+	display: flex;
+}
+
+.page-content {
+	left: 0;
+	width: 100%;
+	height: 97%;
+}
+
+.content-title {
+	left: 0;
+	width: 100%;
+	font-size: 56px;
+	text-align: center;
+	font-style: italic;
+}
+
+.content {
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+}

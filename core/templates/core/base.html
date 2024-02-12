@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <title>
+        {% block page-title %}
+            Система управления сигналами проекта
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="/">
+                        <img src="{% static 'core/img/logo3.png' %}" alt="logo">
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        авторизация &bigtriangledown;
+                    </a>
+                    <ul class="submenu">
+                        {% if user.is_authenticated %}
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    профиль
+                                </a>
+                            </li>
+                            <li class=".menu-item">
+                                <a href="#" class="menu-link">
+                                    выйти
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    войти
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="menu-link">
+                        о проекте
+                    </a>
+                </li>
+                {% block custom-menu %}
+                {% endblock %}
+            </ul>
+        </nav>
+    </header>
+    <div class="page-content">
+        <div class="content-title">
+            {% block content-title %}
+            {% endblock %}
+        </div>
+        <div class="content">
+            {% block content %}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est in quas quasi? Consequatur iusto laboriosam repellat? Blanditiis commodi consequatur, incidunt laudantium, maiores minus, molestias neque nesciunt nihil quibusdam repellendus!
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
