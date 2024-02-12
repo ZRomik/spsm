@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content-title %}
+Главная
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p>
+        <h2>Добро пожаловать, {{ user.profile.fio }}!</h2>
+    </p>
+{% else %}
+    <p>
+        <h2>Для начала работа необходимо авторизироваться!</h2>
+    </p>
+{% endif %}
+{% endblock %}
