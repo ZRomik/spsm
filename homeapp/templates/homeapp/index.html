@@ -1,9 +1,5 @@
 {% extends 'core/base.html' %}
 
-{% block content-title %}
-Главная
-{% endblock %}
-
 {% block content %}
 {% if user.is_authenticated %}
     <p>
@@ -11,7 +7,7 @@
     </p>
 {% else %}
     <p>
-        <h2>Для начала работа необходимо авторизироваться!</h2>
+        <h2>Для начала работа необходимо авторизироваться.</h2>
     </p>
 {% endif %}
 {% endblock %}
