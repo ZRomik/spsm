@@ -6,3 +6,62 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+body {
+	padding: 0;
+	margin: 0;
+	background-color: white;
+	font-family: GolosUIWebRegular;
+
+}
+
+.menu {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	align-items: center;
+	background-color: white;
+}
+
+.menu-link {
+	display: block;
+	color: green;
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 1em;
+	white-space: nowrap;
+}
+
+.menu-link:hover {
+	background-color: green;
+	color: yellow;
+}
+
+.menu-link:focus {
+	background-color: green;
+	color: yellow;
+	outline: none;
+}
+
+.submenu {
+	display: none;
+	flex-direction: column;
+	list-style: none;
+	padding: 0;
+	position: absolute;
+	background-color: white;
+}
+
+.menu-item {
+	position: relative;
+	white-space: nowrap;
+	width: 200px;
+	text-align: left;
+}
+
+.menu-item:hover > .submenu {
+	display: flex;
+}
