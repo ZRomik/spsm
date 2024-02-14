@@ -139,6 +139,11 @@ LOGGING = {
             "datefmt": "%d.%m.%Y %H:%M:%S",
             "style": "{",
         },
+        "common_formatter": {
+            "format": "[{levelname}] [{ascname}] [msg:{message}]",
+            "datefmt": "%d.%m.%Y %H:%M:%S",
+            "style": "{",
+        },
     },
 
     "handlers": {
@@ -150,7 +155,8 @@ LOGGING = {
         "info_handler": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": "logs/info.log"
+            "formatter": "common_formatter",
+            "filename": "logs/info.log",
         },
     },
     "loggers": {
@@ -162,7 +168,7 @@ LOGGING = {
         "info_logger": {
             "handlers": ["info_handler"],
             "level": "INFO",
-            "propagate": True,
+            "propagate": False,
         },
     },
 }
