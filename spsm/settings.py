@@ -130,18 +130,63 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": True,
+#     "formatters": {
+#         "debug_formatter": {
+#             "format": "[{levelname}]: [{asctime}] [{module}] {message}",
+#             "datefmt": "%d.%m.%Y %H:%M:%S",
+#             "style": "{",
+#         },
+#         "common_formatter": {
+#             "format": "[{levelname}] [{ascname}] [msg:{message}]",
+#             "datefmt": "%d.%m.%Y %H:%M:%S",
+#             "style": "{",
+#         },
+#     },
+#
+#     "handlers": {
+#         "debug_handler": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "formatter": "debug_formatter",
+#         },
+#         "info_handler": {
+#             "level": "INFO",
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "backupCount": 10,
+#             "formatter": "common_formatter",
+#             "filename": "logs/info.log",
+#             "maxBytes": 1048576,
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["debug_handler"],
+#             "level": "DEBUG",
+#             "propagate": False,
+#         },
+#         "info_logger": {
+#             "handlers": ["info_handler"],
+#             "level": "INFO",
+#             "propagate": False,
+#         },
+#     },
+# }
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
+
     "formatters": {
         "debug_formatter": {
-            "format": "[{levelname}]: [{asctime}] [{module}] {message}",
-            "datefmt": "%d.%m.%Y %H:%M:%S",
+            "format": "[{levelname} {asctime} {module} %(funcName)s] %(username)s [{message}]",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         },
         "common_formatter": {
-            "format": "[{levelname}] [{ascname}] [msg:{message}]",
-            "datefmt": "%d.%m.%Y %H:%M:%S",
+            "format": "[{levelname}] | [{asctime}] | [{module}] | [{message}]",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         },
     },
@@ -154,23 +199,22 @@ LOGGING = {
         },
         "info_handler": {
             "level": "INFO",
-            "class": "logging.handlers.RotatingFileHandler",
-            "backupCount": 10,
-            "formatter": "common_formatter",
+            "class": "logging.FileHandler",
             "filename": "logs/info.log",
-            "maxBytes": 1048576,
+            "formatter": "common_formatter",
+        },
+        "error_handler": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "logs/errors.log",
+            "formatter": "debug_formatter",
         },
     },
+
     "loggers": {
         "django": {
-            "handlers": ["debug_handler"],
+            "handlers": ["debug_handler", "info_handler", "error_handler"],
             "level": "DEBUG",
-            "propagate": False,
         },
-        "info_logger": {
-            "handlers": ["info_handler"],
-            "level": "INFO",
-            "propagate": False,
-        },
-    },
+    }
 }
