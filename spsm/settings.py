@@ -154,9 +154,11 @@ LOGGING = {
         },
         "info_handler": {
             "level": "INFO",
-            "class": "logging.FileHandler",
+            "class": "logging.handlers.RotatingFileHandler",
+            "backupCount": 10,
             "formatter": "common_formatter",
             "filename": "logs/info.log",
+            "maxBytes": 1048576,
         },
     },
     "loggers": {
