@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -130,18 +131,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
-
     "version": 1,
-    "disable_existing_loggers": False,
-
+    "disable_existing_loggers": True,
     "handlers": {
-        "console": {
+        "debug_handler": {
+            "level": "DEBUG",
             "class": "logging.StreamHandler",
         },
     },
-
-    "root": {
-      "handlers": ["console"],
-        "level": "DEBUG",
+    "loggers": {
+        "django": {
+            "handlers": ["debug_handler"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
     },
 }
