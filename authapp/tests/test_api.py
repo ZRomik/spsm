@@ -54,5 +54,5 @@ class APITestCase(TestCase):
         )
         self.assertTrue(
             'email' in form.errors.keys(),
-            "Нет сообщения об адресе эл. почты!"
+            "Нет адреса эл. почты!"
         )
