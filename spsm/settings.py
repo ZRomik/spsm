@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -129,3 +130,47 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "debug_formatter": {
+            "format": "[{levelname} {asctime} {module} %(funcName)s] %(username)s [{message}]",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
+            "style": "{",
+        },
+        "common_formatter": {
+            "format": "[{levelname}] | [{asctime}] | [{module}] | [{message}]",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+        "debug_handler": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "debug_formatter",
+        },
+        "info_handler": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "logs/info.log",
+            "formatter": "common_formatter",
+        },
+        "error_handler": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "logs/errors.log",
+            "formatter": "debug_formatter",
+        },
+    },
+
+    "loggers": {
+        "django": {
+            "handlers": ["debug_handler", "info_handler", "error_handler"],
+            "level": "DEBUG",
+        },
+    }
+}
