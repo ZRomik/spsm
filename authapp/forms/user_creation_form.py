@@ -7,7 +7,7 @@ class SPSMUserCreationForm(UserCreationForm):
     """
     Форма для создания ученой записи пользователя.
     """
-    email = forms.CharField(label="Раб. почта", required=True, help_text="Адрес раб. эл. почты. ")
+    email = forms.CharField(label="Эл. почта", required=True)
     class Meta:
         model = User
         fields = [
