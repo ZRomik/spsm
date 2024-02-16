@@ -7,10 +7,8 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td>
-                    <div>
-                        &bigstar; отмечены обязательные для заполнения поля
-                    </div>
+                <td align="center">
+                    Все поля обязательны для заполнения.
                 </td>
             </tr>
             <tr>
@@ -18,11 +16,11 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="{% static 'authapp/img/username-icon.png' %}" alt="username" width="25" height="25">
+                                <img src="{% static 'authapp/img/username-icon.png' %}" alt="login" width="25" height="25">
                             </td>
                             <td>
                                 <label for="id_username">
-                                    Имя пользователя &bigstar;
+                                    Имя пользователя:
                                 </label>
                             </td>
                             <td>
@@ -31,11 +29,19 @@
                         </tr>
                         <tr>
                             <td>
-                                <img src="{% static 'authapp/img/password-icon.png' %}" alt="password" width="25" height="25">
+
+                            </td>
+                            <td colspan="2">
+                                Не более 150 символов. Только буквы, цифры и символы @/./+/-/_
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="{% static 'authapp/img/password-icon.png' %}" alt="login" width="25" height="25">
                             </td>
                             <td>
                                 <label for="id_password1">
-                                    Пароль &bigstar;
+                                    Пароль:
                                 </label>
                             </td>
                             <td>
@@ -44,28 +50,55 @@
                         </tr>
                         <tr>
                             <td>
-                                <img src="{% static 'authapp/img/email-icon.png' %}" alt="email" width="25" height="25">
                             </td>
-                            <td>
-                                <label for="id_email">
-                                    Раб. почта &bigstar;
-                                </label>
-                            </td>
-                            <td>
-                                <input type="text" id="id_email" name="name">
+                            <td colspan="2">
+                                <ul>
+                                    <li>
+                                        Пароль не должен быть похож на другую личную информацию.
+                                    </li>
+                                    <li>
+                                        Пароль должен содержать как минимум 8 символов.
+                                    </li>
+                                    <li>
+                                        Пароль не должен быть слишком простым и распространенным.
+                                    </li>
+                                    <li>
+                                        Пароль не может состоять только из цифр.
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img src="{% static 'authapp/img/password-icon.png' %}" alt="password" width="25" height="25">
+
                             </td>
                             <td>
                                 <label for="id_password2">
-                                    Повторите пароль &bigstar;
+                                    Повторите пароль:
                                 </label>
                             </td>
                             <td>
                                 <input type="password" id="id_password2" name="password2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="{% static 'authapp/img/email-icon.png' %}" alt="login" width="25" height="25">
+                            </td>
+                            <td>
+                                <label for="id_email">
+                                    Эл. почта:
+                                </label>
+                            </td>
+                            <td>
+                                <input type="text" id="id_email" name="email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td colspan="2">
+                                Адрес рабочей эл. почты.
                             </td>
                         </tr>
                     </table>
