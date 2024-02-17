@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from .views import register_user_account
 
@@ -11,5 +11,12 @@ urlpatterns = [
             next_page="/"
         ),
         name="login"
+    ),
+    path(
+        "logout/",
+        LogoutView.as_view(
+            next_page="/"
+        ),
+        name="logout"
     )
 ]
