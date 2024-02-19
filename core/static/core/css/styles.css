@@ -87,3 +87,21 @@ body {
 	height: 100%;
 	overflow-y: auto;
 }
+
+.form-errors {
+	width: 57%;
+}
+
+.e-title {
+	text-align: center;
+	font-weight: bold;
+}
+
+.e-list {
+	list-style: none;
+}
+
+.e-text {
+	color: red;
+	font-weight: bold;
+}
