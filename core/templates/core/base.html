@@ -58,6 +58,34 @@
             {% block content-title %}
             {% endblock %}
         </div>
+        <div class="form-errors">
+            {% if form.errors %}
+                <div class="e-title">
+                    Исправьте перечисленные ошибки
+                </div>
+                <ul class="e-list">
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <li class="e-text">
+                                {{ error }}
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li class="e-text">
+                                    {{ field.label }}: {{ error }}
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+
+                    {% endif %}
+{#                    <li class="e-text">#}
+{#                        ошибка!#}
+{#                    </li>#}
+                </ul>
+            {% endif %}
+        </div>
         <div class="content">
             {% block content %}
             {% endblock %}
