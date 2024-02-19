@@ -2,6 +2,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from .views import register_user_account
 
+
 app_name = "auth"
 urlpatterns = [
     path(
@@ -18,5 +19,10 @@ urlpatterns = [
             next_page="/"
         ),
         name="logout"
+    ),
+    path(
+        "register/",
+        register_user_account,
+        name="register"
     )
 ]
