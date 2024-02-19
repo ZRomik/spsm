@@ -30,7 +30,7 @@ class APITestCase(TestCase):
             if user.username == "test":
                 user.delete()
 
-    def test_register_user_ok(self):
+    def test_register_user_api_ok(self):
         """
         Тестирование создания учетной записи пользователя.
         """
@@ -42,7 +42,7 @@ class APITestCase(TestCase):
             "Аккаунт не создан!"
         )
 
-    def test_register_user_error(self):
+    def test_register_user_api_error(self):
         created, user, form = get_user_account(self.register_data_no_email)
         self.assertFalse(
             created,
