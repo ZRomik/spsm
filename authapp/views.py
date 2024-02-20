@@ -33,11 +33,5 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
             }
             return render(request, "authapp/register-account.html", context=context)
     else:
-        logger.error(
-            msg="Тип запроса не поддерживается",
-            extra={
-                "username": request.user,
-                "funcname": __name__
-            }
-        )
+        logger.error("Тип запроса не поддерживается")
         return HttpResponse(status=405)
