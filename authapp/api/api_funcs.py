@@ -3,9 +3,18 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def get_user_account(request):
-    logging.info("Обращение к функции АПИ 'get_user_account'")
-    form = SPSMUserCreationForm(request)
+def get_or_create_user_account(request):
+    try:
+        username = request.user.username
+    except:
+        username = "Незарегистрированный пользователь"
+
+    logging.info("Обращение к функции АПИ 'get_user_account'",
+                 extra={
+                     "username": username
+                 }
+                 )
+    form = SPSMUserCreationForm(request.POST)
     user = None
     if form.is_valid():
         user = form.save()

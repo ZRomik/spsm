@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
-from ..api import get_user_account
+from django.test import RequestFactory, TestCase
+from ..api import get_or_create_user_account
 import logging
+from django.contrib.auth.models import AnonymousUser, User
 
 logger = logging.getLogger(__name__)
 
@@ -13,15 +14,19 @@ class APITestCase(TestCase):
     def setUpTestData(cls):
         super().setUpTestData()
         cls.register_data_and_email = {
-            "username": "test",
-            "password1": "test123123",
-            "password2": "test123123",
-            "email": "mail@testmail.com"
+            "POST": {
+                "username": "test",
+                "password1": "test123123",
+                "password2": "test123123",
+                "email": "mail@testmail.com"
+            }
         }
         cls.register_data_no_email = {
-            "username": "test",
-            "password1": "test123123",
-            "password2": "test123123",
+            "POST": {
+                "username": "test",
+                "password1": "test123123",
+                "password2": "test123123",
+            }
         }
 
     def tearDown(self) -> None:
@@ -34,7 +39,10 @@ class APITestCase(TestCase):
         """
         Тестирование создания учетной записи пользователя.
         """
-        created, user, form = get_user_account(self.register_data_and_email)
+        factory = RequestFactory()
+        request = factory.post("")
+        request.POST = self.register_data_no_email
+        created, user, form = get_or_create_user_account(request)
         if form:
             print(f"Ошибка в данных: {form.errors}")
         self.assertTrue(
@@ -43,7 +51,14 @@ class APITestCase(TestCase):
         )
 
     def test_register_user_api_error(self):
-        created, user, form = get_user_account(self.register_data_no_email)
+        """
+        Тестирование ошибки при регистрации аккаунта.
+        """
+        factory = RequestFactory()
+        request = factory.post("")
+        request.user = AnonymousUser
+        request.POST = self.register_data_and_email
+        created, user, form = get_or_create_user_account(request)
         self.assertFalse(
             created,
             "Аккаунто создан!"

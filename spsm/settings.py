@@ -191,6 +191,11 @@ LOGGING = {
             "format": "[{levelname}] [{asctime}] [{message}]",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
+        },
+        "detailed_formatter": {
+            "format": "{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
+            "style": "{",
         }
     },
 
@@ -199,6 +204,12 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "debug_formatter",
+        },
+        "info_handler": {
+            "level": "INFO",
+            "formatter": "detailed_formatter",
+            "class": "logging.FileHandler",
+            "filename": os.path.join("logs", "info.log"),
         }
     },
 
@@ -206,6 +217,10 @@ LOGGING = {
         "": {
             "level": "DEBUG",
             "handlers": ["debug_handler",]
+        },
+        "": {
+            "level": "INFO",
+            "handlers": ["info_handler"],
         }
     }
 }
