@@ -9,7 +9,7 @@ def get_or_create_user_account(request):
     except:
         username = "Незарегистрированный пользователь"
 
-    logging.info("Обращение к функции АПИ 'get_user_account'",
+    logging.info(f"Обращение к АПИ.",
                  extra={
                      "username": username
                  }
