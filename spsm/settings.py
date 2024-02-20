@@ -132,53 +132,53 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-
-    "formatters": {
-        "debug_formatter": {
-            "format": "[{levelname} {asctime} {module}] [{message}]",
-            "datefmt": "%d.%m.%Y в %H:%M:%S",
-            "style": "{",
-        },
-        "common_formatter": {
-            "format": '{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}. {message}',
-            "datefmt": "%d.%m.%Y в %H:%M:%S",
-            "style": "{",
-        },
-    },
-
-    "handlers": {
-        "debug_handler": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "debug_formatter",
-        },
-        "info_handler": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": "logs/authapp_info.log",
-            "formatter": "common_formatter",
-        },
-        "warning_handler": {
-            "level": "WARNING",
-            "class": "logging.FileHandler",
-            "filename": "logs/authapp_warnings.log",
-            "formatter": "common_formatter",
-        },
-        "error_handler": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": "logs/authapp_errors.log",
-            "formatter": "common_formatter",
-        },
-    },
-
-    "loggers": {
-        '': {
-            "level": "DEBUG",
-            "handlers": ["debug_handler", "info_handler", "error_handler"],
-        },
-    }
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#
+#     "formatters": {
+#         "debug_formatter": {
+#             "format": "[{levelname} {asctime} {module}] [{message}]",
+#             "datefmt": "%d.%m.%Y в %H:%M:%S",
+#             "style": "{",
+#         },
+#         "common_formatter": {
+#             "format": '{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}. {message}',
+#             "datefmt": "%d.%m.%Y в %H:%M:%S",
+#             "style": "{",
+#         },
+#     },
+#
+#     "handlers": {
+#         "debug_handler": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "formatter": "debug_formatter",
+#         },
+#         "info_handler": {
+#             "level": "INFO",
+#             "class": "logging.FileHandler",
+#             "filename": "logs/authapp_info.log",
+#             "formatter": "common_formatter",
+#         },
+#         "warning_handler": {
+#             "level": "WARNING",
+#             "class": "logging.FileHandler",
+#             "filename": "logs/authapp_warnings.log",
+#             "formatter": "common_formatter",
+#         },
+#         "error_handler": {
+#             "level": "ERROR",
+#             "class": "logging.FileHandler",
+#             "filename": "logs/authapp_errors.log",
+#             "formatter": "common_formatter",
+#         },
+#     },
+#
+#     "loggers": {
+#         '': {
+#             "level": "DEBUG",
+#             "handlers": ["debug_handler", "info_handler", "error_handler"],
+#         },
+#     }
+# }
