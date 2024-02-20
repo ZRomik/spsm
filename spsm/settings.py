@@ -138,12 +138,12 @@ LOGGING = {
 
     "formatters": {
         "debug_formatter": {
-            "format": "[{levelname} {asctime} {module} %(funcName)s] %(username)s [{message}]",
+            "format": "[{levelname} {asctime} {module}] [{message}]",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         },
         "common_formatter": {
-            "format": "[{levelname}] | [{asctime}] | [{module}] | [{message}]",
+            "format": '{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}. {message}',
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         },
@@ -158,21 +158,27 @@ LOGGING = {
         "info_handler": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": "logs/info.log",
+            "filename": "logs/authapp_info.log",
+            "formatter": "common_formatter",
+        },
+        "warning_handler": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": "logs/authapp_warnings.log",
             "formatter": "common_formatter",
         },
         "error_handler": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": "logs/errors.log",
-            "formatter": "debug_formatter",
+            "filename": "logs/authapp_errors.log",
+            "formatter": "common_formatter",
         },
     },
 
     "loggers": {
-        "django": {
-            "handlers": ["debug_handler", "info_handler", "error_handler"],
+        '': {
             "level": "DEBUG",
+            "handlers": ["debug_handler", "info_handler", "error_handler"],
         },
     }
 }
