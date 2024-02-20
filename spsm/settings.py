@@ -193,7 +193,7 @@ LOGGING = {
             "style": "{",
         },
         "detailed_formatter": {
-            "format": "{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
+            "format": "{asctime} от имени пользователя %(username)s в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         }
