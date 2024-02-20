@@ -186,9 +186,26 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
 
-    "formatters": {},
+    "formatters": {
+        "debug_formatter": {
+            "format": "[{levelname}] [{asctime}] [{message}]",
+            "datefmt": "%d.%m.%Y в %H:%M:%S",
+            "style": "{",
+        }
+    },
 
-    "handlers": {},
+    "handlers": {
+        "debug_handler": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "debug_formatter",
+        }
+    },
 
-    "loggers": {}
+    "loggers": {
+        "": {
+            "level": "DEBUG",
+            "handlers": ["debug_handler",]
+        }
+    }
 }
