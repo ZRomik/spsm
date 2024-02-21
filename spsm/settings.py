@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'core.helpers.log_helper.LoggedInUserMiddleware',
 ]
 
 ROOT_URLCONF = 'spsm.urls'
@@ -186,14 +187,21 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
 
+
     "formatters": {
         "debug_formatter": {
             "format": "[{levelname}] [{asctime}] [{message}]",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         },
+
+        "filters": {
+            "logged_in_username": {
+                "()": "core.helpers.log_helper.LoggedInUsernameFilter",
+            }
+        },
         "detailed_formatter": {
-            "format": "{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
+            "format": "{asctime} от имени пользователя %(username)s в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         }
@@ -210,6 +218,7 @@ LOGGING = {
             "formatter": "detailed_formatter",
             "class": "logging.FileHandler",
             "filename": os.path.join("logs", "info.log"),
+            "encoding": "UTF-8",
         }
     },
 
@@ -218,7 +227,7 @@ LOGGING = {
             "level": "DEBUG",
             "handlers": ["debug_handler",]
         },
-        "": {
+        "authapp": {
             "level": "INFO",
             "handlers": ["info_handler"],
         }
