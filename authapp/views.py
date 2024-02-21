@@ -10,9 +10,12 @@ logger = logging.getLogger(__name__)
 
 @permission_required("auth.add_user")
 def register_user_account(request: HttpRequest) -> HttpResponse:
-    logger.info(
-        "Вызов register_user_account"
-    )
+    logger.debug(
+        "Вызов register_user_account",
+        extra={
+            "username": request.user
+        }
+                 )
 
     if request.method == "GET":
         return render(request, "authapp/register-account.html")
@@ -25,7 +28,7 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
                 msg="Аккаунт не создан!",
                 extra={
                     "username": request.user,
-                    "funcame": __name__,
+                    "funcname": __name__,
                 }
             )
             context = {
@@ -33,5 +36,5 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
             }
             return render(request, "authapp/register-account.html", context=context)
     else:
-        logger.error("Тип запроса не поддерживается")
+        logger.error(f"{request.method}: запрос не поддерживается.")
         return HttpResponse(status=405)
