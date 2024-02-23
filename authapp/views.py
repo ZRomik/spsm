@@ -10,13 +10,6 @@ logger = logging.getLogger(__name__)
 
 @permission_required("auth.add_user")
 def register_user_account(request: HttpRequest) -> HttpResponse:
-    logger.debug(
-        "Вызов register_user_account",
-        extra={
-            "username": request.user
-        }
-                 )
-
     if request.method == "GET":
         return render(request, "authapp/register-account.html")
     elif request.method == "POST":
@@ -36,7 +29,7 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
             return render(request, "authapp/register-account.html", context=context)
     else:
         logger.warning(
-            f"получен неподдерживаемый запрос: {request.method}.",
+            f"получен неподдерживаемый запрос {request.method}.",
             extra={
                 "username": request.user.username
             }
