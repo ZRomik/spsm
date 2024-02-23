@@ -142,7 +142,7 @@ LOGGING = {
 
     "formatters": {
         "default_formatter": {
-            "format": "[{levelname}]: {asctime} {name} [{username}] {message}",
+            "format": "[{levelname}]: {asctime} {name} {module} [{username}] {message}",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         }
