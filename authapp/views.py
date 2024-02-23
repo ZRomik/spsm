@@ -24,11 +24,10 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
         if created:
             return HttpResponse("Аккаунт создан.", status=200)
         elif not created and form:
-            logger.error(
+            logger.info(
                 msg="Аккаунт не создан!",
                 extra={
-                    "username": request.user,
-                    "funcname": __name__,
+                    "username": request.user.username
                 }
             )
             context = {
@@ -36,5 +35,10 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
             }
             return render(request, "authapp/register-account.html", context=context)
     else:
-        logger.error(f"{request.method}: запрос не поддерживается.")
+        logger.warning(
+            f"получен неподдерживаемый запрос: {request.method}.",
+            extra={
+                "username": request.user.username
+            }
+        )
         return HttpResponse(status=405)
