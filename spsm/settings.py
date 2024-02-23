@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 from pathlib import Path
-
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
@@ -60,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'core.helpers.log_helper.LoggedInUserMiddleware',
 ]
 
 ROOT_URLCONF = 'spsm.urls'
@@ -135,116 +133,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#
-#     "formatters": {
-#         "debug_formatter": {
-#             "format": "[{levelname} {asctime} {module}] [{message}]",
-#             "datefmt": "%d.%m.%Y в %H:%M:%S",
-#             "style": "{",
-#         },
-#         "common_formatter": {
-#             "format": '{asctime} от имени пользователя {username} в  функции {funcName} модуля {name} произошло событие {levelname}. {message}',
-#             "datefmt": "%d.%m.%Y в %H:%M:%S",
-#             "style": "{",
-#         },
-#     },
-#
-#     "handlers": {
-#         "debug_handler": {
-#             "level": "DEBUG",
-#             "class": "logging.StreamHandler",
-#             "formatter": "debug_formatter",
-#         },
-#         "info_handler": {
-#             "level": "INFO",
-#             "class": "logging.FileHandler",
-#             "filename": "logs/authapp_info.log",
-#             "formatter": "common_formatter",
-#         },
-#         "warning_handler": {
-#             "level": "WARNING",
-#             "class": "logging.FileHandler",
-#             "filename": "logs/authapp_warnings.log",
-#             "formatter": "common_formatter",
-#         },
-#         "error_handler": {
-#             "level": "ERROR",
-#             "class": "logging.FileHandler",
-#             "filename": "logs/authapp_errors.log",
-#             "formatter": "common_formatter",
-#         },
-#     },
-#
-#     "loggers": {
-#         '': {
-#             "level": "DEBUG",
-#             "handlers": ["debug_handler", "info_handler", "error_handler"],
-#         },
-#     }
-# }
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#
-#
-#     "formatters": {
-#         "debug_formatter": {
-#             "format": "[{levelname}] [{asctime}] [{message}]",
-#             "datefmt": "%d.%m.%Y в %H:%M:%S",
-#             "style": "{",
-#         },
-#
-#         "filters": {
-#             "logged_in_username": {
-#                 "()": "core.helpers.log_helper.LoggedInUsernameFilter",
-#             }
-#         },
-#         "detailed_formatter": {
-#             "format": "{asctime} от имени пользователя %(username)s в  функции {funcName} модуля {name} произошло событие {levelname}, которое сообщило: {message}", #"{asctime} пользователь {userName} обратился к функции {funcName} в модуле {name}. При обращении произошло событие {levelname} с сообщением {message}.",
-#             "datefmt": "%d.%m.%Y в %H:%M:%S",
-#             "style": "{",
-#         }
-#     },
-#
-#     "handlers": {
-#         "debug_handler": {
-#             "level": "DEBUG",
-#             "class": "logging.StreamHandler",
-#             "formatter": "debug_formatter",
-#         },
-#         "info_handler": {
-#             "level": "INFO",
-#             "formatter": "detailed_formatter",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join("logs", "info.log"),
-#             "encoding": "UTF-8",
-#         }
-#     },
-#
-#     "loggers": {
-#         "": {
-#             "level": "DEBUG",
-#             "handlers": ["debug_handler",]
-#         },
-#         "authapp": {
-#             "level": "INFO",
-#             "handlers": ["info_handler"],
-#         }
-#     }
-# }
 
 LOGIN_URL = reverse_lazy("auth:login")
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
 
     "formatters": {
         "default_formatter": {
-            "format": "[{levelname}] [{asctime}] [{username}] [{message}]",
+            "format": "[{levelname}]: {asctime} {name} [{username}] {message}",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
         }
