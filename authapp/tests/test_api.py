@@ -44,7 +44,6 @@ class APITestCase(TestCase):
             for field in form:
                 for error in field.errors:
                     print(f"{field.label}: {error}")
-            # print(f"Ошибка в данных: {form.errors}")
         self.assertTrue(
             created,
             "Аккаунт не создан!"
