@@ -6,7 +6,9 @@ from django.core.management import BaseCommand
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(
-            "Настройка проекта..."
+            self.style.SUCCESS(
+                "Настройка проекта..."
+            )
         )
         self.stdout.write(
             self.style.WARNING(
@@ -89,6 +91,6 @@ class Command(BaseCommand):
         )
         self.stdout.write(
             self.style.SUCCESS(
-                "Настройка завершена."
+                "Настройка проекта завершена."
             )
         )
