@@ -6,7 +6,7 @@ from django.core.management import BaseCommand
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(
-            "Настройка проекта."
+            "Настройка проекта..."
         )
         self.stdout.write(
             self.style.WARNING(
@@ -22,12 +22,12 @@ class Command(BaseCommand):
         role_manager_group = Group.objects.get_or_create(
             name="Менеджер назначений"
         )[0]
-        add_user_perm = Permission.objects.get_or_create(
+        add_user_perm = Permission.objects.get(
             codename="add_user"
-        )[0]
-        delete_user_perm = Permission.objects.get_or_create(
+        )
+        delete_user_perm = Permission.objects.get(
             codename="delete_user"
-        )[0]
+        )
         auth_ct = ContentType.objects.get_for_model(
             Permission
         )
