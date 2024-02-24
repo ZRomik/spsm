@@ -33,7 +33,7 @@ class Command(BaseCommand):
         )
         assign_group_perm = Permission.objects.get_or_create(
             codename="assign_group",
-            name="Может добавлять полдзователя в группу",
+            name="Может добавлять пользователя в группу",
             content_type=auth_ct
         )[0]
         discharge_group_perm = Permission.objects.get_or_create(
