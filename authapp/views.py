@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, ListView
 
 from .forms import SPSMUserCreationForm
 from .api import get_or_create_user_account
@@ -46,3 +46,9 @@ class DeleteUserAccountView(PermissionRequiredMixin, DeleteView):
     queryset = User.objects.all()
     context_object_name = "usr"
     success_url = "/"
+
+class AccountsListView(LoginRequiredMixin, ListView):
+    template_name = "authapp/accounts-list.html"
+    model = User
+    queryset = User.objects.all()
+    context_object_name = "users"
