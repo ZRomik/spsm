@@ -248,3 +248,33 @@ class DeleteUserAccountTestCase(TestCase):
             user = User.objects.get(
                 username="test"
             )
+
+class AccountsListViewTestCase(TestCase):
+    """
+    Тестирование представления AccountsListView
+    """
+    def setUp(self) -> None:
+        super().setUp()
+        self.test_user = User.objects.create_user(
+            username="test",
+            password="test"
+        )
+
+    def tearDown(self) -> None:
+        super().tearDown()
+        self.test_user.delete()
+
+    def test_accounts_list_no_logged_user(self):
+        self.client.logout()
+        url = reverse_lazy("auth:accounts-list")
+        response = self.client.get(url)
+        self.assertEqual(
+            response.status_code,
+            302,
+            "Неверный код ответа!"
+        )
+        self.assertIn(
+            "login",
+            response.url,
+            "Неверный адрес редиректа!"
+        )
