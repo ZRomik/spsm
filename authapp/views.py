@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import DeleteView
+
 from .forms import SPSMUserCreationForm
 from .api import get_or_create_user_account
 from django.contrib.auth.decorators import permission_required
@@ -35,3 +39,10 @@ def register_user_account(request: HttpRequest) -> HttpResponse:
             }
         )
         return HttpResponse(status=405)
+
+class DeleteUserAccountView(PermissionRequiredMixin, DeleteView):
+    permission_required = "auth.delete_user"
+    template_name = "authapp/confirm-account-delete.html"
+    queryset = User.objects.all()
+    context_object_name = "usr"
+    success_url = "/"
