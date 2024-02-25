@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     register_user_account,
     DeleteUserAccountView,
+    AccountsListView,
 )
 
 
@@ -29,4 +30,5 @@ urlpatterns = [
         name="register"
     ),
     path("delete/<int:pk>/", DeleteUserAccountView.as_view(), name="delete"),
+    path("accounts/", AccountsListView.as_view(), name="accounts-list")
 ]
