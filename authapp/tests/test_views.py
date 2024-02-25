@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group, Permission
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse_lazy
 
@@ -167,3 +168,83 @@ class RegisterUserAccountTestCase(TestCase):
             "Неверный код ответа!"
 
         )
+
+class DeleteUserAccountTestCase(TestCase):
+    """
+    Тестировани епредставления DeleteUserAccountView
+    """
+    def setUp(self) -> None:
+        super().setUp()
+        self.test_user = User.objects.create_user(
+            username="test",
+            password="test"
+        )
+        self.user = User.objects.create_user(
+            username="user",
+            password="user"
+        )
+        self.simple_user = User.objects.create_user(
+            username="simple",
+            password="simple"
+        )
+        self.group = Group.objects.get_or_create(
+            name="test_group"
+        )[0]
+        delete_user_perm = Permission.objects.get(
+            codename="delete_user"
+        )
+        self.group.permissions.add(delete_user_perm)
+        self.group.save()
+        self.user.groups.add(self.group)
+        self.user.save()
+
+    def tearDown(self) -> None:
+        super().tearDown()
+        self.user.delete()
+        self.simple_user.delete()
+        self.group.delete()
+        try:
+            self.test_user.delete()
+        except:
+            pass
+
+    def test_delete_user_account_no_perm_user(self):
+        self.client.force_login(self.test_user)
+        self.assertFalse(
+            self.test_user.groups.filter(name="simple_group").exists(),
+            "У пользователя есть права на удаление аккаунта!"
+
+        )
+        url = reverse_lazy("auth:delete", kwargs={"pk": self.test_user.pk})
+        response = self.client.post(url)
+        self.assertEqual(
+            response.status_code,
+            403,
+            "Неверный код ответа!"
+        )
+
+    def test_delete_user_account_perm_user(self):
+        self.client.force_login(self.user)
+        self.assertTrue(
+            self.user.groups.filter(name="test_group").exists(),
+            "У пользователя нет прав на удаление аккаунта!"
+        )
+        url = reverse_lazy("auth:delete", kwargs={"pk": self.test_user.pk})
+        response = self.client.post(url)
+        self.assertEqual(
+            response.status_code,
+            302,
+            "Неверный код ответа!"
+        )
+        self.assertIn(
+            response.url,
+            "/",
+            "Неверный адрес редиректа!"
+        )
+        with self.assertRaises(
+            expected_exception=ObjectDoesNotExist,
+            msg="Аккаунт не удален!"
+        ):
+            user = User.objects.get(
+                username="test"
+            )
