@@ -7,24 +7,19 @@
 {% block content %}
 <div class="accounts-list">
 <ol>
-    <table>
+    <table class="accounts-table">
         {% for usr in users %}
             <tr>
                 <td>
-                    <li></li>
+                    <li>
+
+                    </li>
                 </td>
                 <td>
-                    {% firstof usr.profile.fio usr.usermame %}
+                    <a href="#">
+                        {% firstof usr.profil.fio usr.username %}
+                    </a>
                 </td>
-                {% if perms.profile.edit_profile %}
-                    <td>
-                        <form action="#">
-                            <button>
-                                Редактировать
-                            </button>
-                        </form>
-                    </td>
-                {% endif %}
                 {% if perms.auth.delete_user %}
                     <td>
                         <form action="{% url 'auth:delete' pk=usr.pk %}">
@@ -34,6 +29,12 @@
                         </form>
                     </td>
                 {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td>
+                    Список аккаунтов пустой
+                </td>
             </tr>
         {% endfor %}
     </table>
