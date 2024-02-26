@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 from pathlib import Path
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     'homeapp',
 
     'aboutapp',
+
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -125,52 +128,42 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'uploads'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = reverse_lazy("auth:login")
+
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
 
     "formatters": {
-        "debug_formatter": {
-            "format": "[{levelname} {asctime} {module} %(funcName)s] %(username)s [{message}]",
+        "default_formatter": {
+            "format": "[{levelname}]: {asctime} {name} {module} [{username}] {message}",
             "datefmt": "%d.%m.%Y в %H:%M:%S",
             "style": "{",
-        },
-        "common_formatter": {
-            "format": "[{levelname}] | [{asctime}] | [{module}] | [{message}]",
-            "datefmt": "%d.%m.%Y в %H:%M:%S",
-            "style": "{",
-        },
+        }
     },
 
     "handlers": {
         "debug_handler": {
-            "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "debug_formatter",
-        },
-        "info_handler": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": "logs/info.log",
-            "formatter": "common_formatter",
-        },
-        "error_handler": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": "logs/errors.log",
-            "formatter": "debug_formatter",
-        },
+            "level": "DEBUG",
+            "formatter": "default_formatter"
+        }
     },
 
     "loggers": {
-        "django": {
-            "handlers": ["debug_handler", "info_handler", "error_handler"],
+        "": {
             "level": "DEBUG",
-        },
+            "handlers": ["debug_handler"],
+        }
     }
 }

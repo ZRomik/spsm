@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block content-title %}
+Список зарегистрированных аккаунтов
+{% endblock %}
+
+{% block content %}
+<div class="accounts-list">
+<ol>
+    <table class="accounts-table">
+        {% for usr in users %}
+            <tr>
+                <td>
+                    <li>
+
+                    </li>
+                </td>
+                <td>
+                    <a href="#">
+                        {% firstof usr.profil.fio usr.username %}
+                    </a>
+                </td>
+                {% if perms.auth.delete_user %}
+                    <td>
+                        <form action="{% url 'auth:delete' pk=usr.pk %}">
+                            <button>
+                                Удалить
+                            </button>
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td>
+                    Список аккаунтов пустой
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</ol>
+</div>
+{% endblock %}

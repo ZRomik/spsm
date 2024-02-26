@@ -3,7 +3,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     <p>
-        <h2>Добро пожаловать, {{ user.profile.fio }}!</h2>
+        <h2>Добро пожаловать, {% firstof user.profile.fio user.username %}!</h2>
     </p>
 {% else %}
     <p>

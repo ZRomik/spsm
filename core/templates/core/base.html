@@ -30,24 +30,45 @@
                                 </a>
                             </li>
                             <li class=".menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="{% url 'auth:logout' %}" class="menu-link">
                                     выйти
                                 </a>
                             </li>
                         {% else %}
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="{% url 'auth:login' %}" class="menu-link">
                                     войти
                                 </a>
                             </li>
                         {% endif %}
                     </ul>
                 </li>
-                <li>
+                <li class="menu-item">
                     <a href="{% url 'aboutapp:about' %}" class="menu-link">
                         о проекте
                     </a>
                 </li>
+                {% if user.is_authenticated %}
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            аккаунты &bigtriangledown;
+                        </a>
+                        <ul class="submenu">
+                            <li class="menu-item">
+                                <a href="{% url 'auth:accounts-list' %}" class="menu-link">
+                                    список
+                                </a>
+                            </li>
+                            {% if perms.auth.add_user %}
+                                <li class="menu-item">
+                                    <a href="{% url 'auth:register' %}" class="menu-link">
+                                        регистрация
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
                 {% block custom-menu %}
                 {% endblock %}
             </ul>
@@ -58,9 +79,32 @@
             {% block content-title %}
             {% endblock %}
         </div>
+        <div class="form-errors">
+            {% if form.errors %}
+                <div class="e-title">
+                    Исправьте перечисленные ошибки.
+                </div>
+                <ul class="e-list">
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <li class="e-text">
+                                {{ error }}
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li class="e-text">
+                                    {{ field.label }}: {{ error }}
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
         <div class="content">
             {% block content %}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est in quas quasi? Consequatur iusto laboriosam repellat? Blanditiis commodi consequatur, incidunt laudantium, maiores minus, molestias neque nesciunt nihil quibusdam repellendus!
             {% endblock %}
         </div>
     </div>

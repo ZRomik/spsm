@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content-title %}
+Подтвердите удаление аккаунта.
+{% endblock %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+<table>
+        <tr>
+            <td>
+            Вы действительно хотите удалть аккаунт {% firstof usr.profile.fio usr.username %}? Это действие нельзя отменить.
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="submit">
+                                Удалить
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+</table>
+</form>
+{% endblock %}
