@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'aboutapp',
 
     'authapp',
+
+    'departments',
 ]
 
 MIDDLEWARE = [
