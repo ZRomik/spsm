@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'authapp',
 
     'departments',
+
+    'jobs',
 ]
 
 MIDDLEWARE = [
