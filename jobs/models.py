@@ -9,6 +9,6 @@ class Job(models.Model):
     title = models.CharField(max_length=100, )
 
     class Meta:
-        verbose_name = "Должность"
-        verbose_name_plural = "Должности"
+        verbose_name = "Назначение"
+        verbose_name_plural = "Список назначений"
         db_table = "jobs"
