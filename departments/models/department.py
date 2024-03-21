@@ -7,9 +7,9 @@ class Department(models.Model):
     name: CharField(100) - название отдела
     """
 
-    name = models.CharField(max_length=100, verbose_name="Отдел")
+    name = models.CharField(max_length=100, verbose_name="Подразделение")
 
     class Meta:
-        verbose_name = "Отдел"
-        verbose_name_plural = "Отделы"
+        verbose_name = "Подразделение"
+        verbose_name_plural = "Список подразделений"
         db_table = "departments"
