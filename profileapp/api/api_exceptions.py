@@ -1,0 +1,2 @@
+class ProfileApiException(BaseException):
+    pass
