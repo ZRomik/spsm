@@ -19,8 +19,8 @@ class Profile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, related_name="profile")
-    job = models.OneToOneField(Job, on_delete=models.PROTECT, related_name="job_title", default=1)
-    dept = models.OneToOneField(Department, on_delete=models.PROTECT, default=1, related_name="department")
+    job = models.ForeignKey(Job, on_delete=models.PROTECT, related_name="job_title", default=1)
+    dept = models.ForeignKey(Department, on_delete=models.PROTECT, default=1, related_name="department")
     lastname = models.CharField(max_length=128)
     firstname = models.CharField(max_length=128)
     middlename = models.CharField(max_length=128, blank=True)
