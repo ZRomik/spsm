@@ -7,6 +7,7 @@ from .api_messages import (
 )
 from .api_exceptions import ProfileApiException
 
+
 def get_or_create_profile(user_pk: int = None):
     """
     Функция создает нвый профиль или находит уже созданный и возвращает его.
@@ -19,9 +20,7 @@ def get_or_create_profile(user_pk: int = None):
             raise ProfileApiException(ERROR_INVALID_ACCOUNT_ID)
         try:
             profile = Profile.objects.get_or_create(
-                user_id=user_pk,
-                dept_id=1,
-                job_id=1
+                user_id=user_pk
             )[0]
         except Exception as exc:
             print(exc)
