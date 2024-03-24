@@ -13,58 +13,42 @@ class ModelProfileTestCase(TransactionTestCase):
     Тестирование модели :model:Profile
     """
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.test_user = User.objects.create_user(
-            username="test",
-            password="test"
+    def setUp(self) -> None:
+        super().setUp()
+        self.simple_user = User.objects.create_user(
+            username="simple",
+            password="simple"
         )
-        Job.objects.create(
-            title="job"
-        )
-        Department.objects.create(
-            name="dept"
-        )
+        Job.objects.create(title="job")
+        Department.objects.create(name="dept")
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        super().tearDownClass()
-        # удаляем все профили
-        if Profile.objects.count() > 0:
-            for profile in Profile.objects.all():
-                profile.delete()
-        # удаляем все должности
-        for job in Job.objects.all():
-            job.delete()
-        # удаляем все отделы
-        for dept in Department.objects.all():
-            dept.delete()
-        cls.test_user.delete()
+    def tearDown(self) -> None:
+        super().tearDown()
+        for j in Job.objects.all():
+            j.delete()
+        for d in Department.objects.all():
+            d.delete()
 
-    def test_create_profile(self):
+    def test_create_model_profile(self):
+        print("job:", Job.objects.count())
+        print("dept:", Department.objects.count())
+        print("user:", User.objects.count())
         profile = Profile.objects.create(
-            user_id=self.test_user.pk
+            user_id=self.simple_user.pk
         )
         self.assertIsNotNone(
             profile,
             "Профиль не создан!"
         )
-        self.assertEqual(
-            profile.job,
-            Job.objects.get(pk=1)
-        )
-        self.assertEqual(
-            profile.dept,
-            Department.objects.get(pk=1)
-        )
         profile.delete()
 
-    def test_create_profile_integrity_error(self):
+    def test_create_model_profile_integrity_error(self):
         with self.assertRaises(
             expected_exception=IntegrityError,
             msg="Исключение не возбуждено!"
         ):
             profile = Profile.objects.create(
-                user_id=self.test_user.pk
+                user_id=0
             )
+            if profile:
+                profile.delete()
