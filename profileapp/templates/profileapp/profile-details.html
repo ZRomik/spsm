@@ -1,0 +1,144 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% if perms.profileapp_change_profile or user.is_staff or user.is_superuser %}
+    {% block custom-menu %}
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                редактировать
+            </a>
+        </li>
+    {% endblock %}
+{% endif %}
+
+{% block page-title %}
+    {% if profile %}
+        Профиль сотрудника: profile.fio
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if profile %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Аватар
+                    </th>
+                    <th>
+                        Профиль
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    {% if profile.avatar.image %}
+                        <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                    {% else %}
+                        <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="avatar" width="150" height="150">
+                    {% endif %}
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="profile" width="24" height="24">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Фамилия
+                            </td>
+                            <td>
+                                {% firstof profile.lastname 'Нет данных' %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Имя
+                            </td>
+                            <td>
+                                {% firstof profile.firstname 'Нет данных' %}
+                            </td>
+                        </tr>
+                        {% if not profile.nmn %}
+                            <tr>
+                                <td>
+                                    Отчество
+                                </td>
+                                <td>
+                                    {% firstof profile.middlename 'Нет данных' %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="2">
+                                <img src="{% static 'profileapp/img/phone-icon.png' %}" alt="phone" width="24" height="24">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Внут. тел.
+                            </td>
+                            <td>
+                                {% firstof profile.phone 'Нет данных' %}
+                            </td>
+                        </tr>
+                        {% if profile.phones %}
+                            {% for phone in profile.phones.all %}
+                                <tr>
+                                    <td>
+                                        {{ phone.title }}
+                                    </td>
+                                    <td>
+                                        {{ phone.num }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% if user.is_staff or user.is_superuser or perms.profileapp.change_profile or user.pk == profile.user.pk %}
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-add">
+                                        добавить номер
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="2">
+                                <img src="{% static 'profileapp/img/email-icon.png' %}" alt="email" width="24" height="24">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Корп. почта
+                            </td>
+                            <td>
+                                {% firstof profile.mail 'Нет данных' %}
+                            </td>
+                        </tr>
+                        {% if profile.emails %}
+                            {% for email in profile.emails.all %}
+                                <tr>
+                                    <td>
+                                        {{ email.title }}
+                                    </td>
+                                    <td>
+                                        {{ email.addr }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% if user.is_staff or user.is_superuser or perms.profileapp.change_profile or user.pk == profile.user.pk %}
+                            <a href="#" class="btn-add">
+                                добавить адрес
+                            </a>
+                        {% endif %}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+{% endblock %}
