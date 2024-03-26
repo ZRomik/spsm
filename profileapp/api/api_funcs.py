@@ -15,6 +15,7 @@ def get_or_create_profile(user_pk: int = None):
 
     profile = None
     error = ERROR_OK
+    need_save = False
     try:
         if not user_pk or user_pk <= 0:
             raise ProfileApiException(ERROR_INVALID_ACCOUNT_ID)
@@ -22,7 +23,15 @@ def get_or_create_profile(user_pk: int = None):
             profile = Profile.objects.get_or_create(
                 user_id=user_pk
             )[0]
-        except Exception as exc:
+            if not profile.job_id:
+                profile.job_id = 1
+                need_save = True
+            if not profile.dept_id:
+                profile.dept_id = 1
+                need_save = True
+            if need_save:
+                profile.save()
+        except IntegrityError as exc:
             print(exc)
             raise ProfileApiException(ERROR_INVALID_ACCOUNT_ID)
     except ProfileApiException as exc:
