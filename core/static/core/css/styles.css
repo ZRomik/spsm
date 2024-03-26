@@ -111,3 +111,17 @@ body {
 .accounts-list {
 	overflow-y: auto;
 }
+
+.btn-add {
+	display: block;
+	width: 170px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: green;
+	border-radius: 25px;
+}
+
+.btn-add:hover {
+	background-color: green;
+	color:  yellow;
+}
