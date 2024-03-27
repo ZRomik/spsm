@@ -1,25 +1,21 @@
-{% extends "core/base.html" %}
+{% extends 'core/base.html' %}
 
 {% load static %}
 
-{% if perms.profileapp_change_profile or user.is_staff or user.is_superuser %}
-    {% block custom-menu %}
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                редактировать
-            </a>
-        </li>
+{% if profile %}
+    {% if perms.profileapp.change_profile or user.is_staff %}
+        {% block custom-menu %}
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    редактировать
+                </a>
+            </li>
+        {% endblock %}
+    {% endif %} {# if perms.profileapp.change_profile or user.is_staff #}
+    {% block content-title %}
+        Профиль сотрудника {{ profile.fio }}
     {% endblock %}
-{% endif %}
-
-{% block page-title %}
-    {% if profile %}
-        Профиль сотрудника: profile.fio
-    {% endif %}
-{% endblock %}
-
-{% block content %}
-    {% if profile %}
+    {% block content %}
         <table>
             <thead>
                 <tr>
@@ -36,14 +32,14 @@
                     {% if profile.avatar.image %}
                         <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
                     {% else %}
-                        <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="avatar" width="150" height="150">
+                        <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
                     {% endif %}
                 </td>
                 <td>
                     <table>
                         <tr>
                             <td colspan="2" align="center">
-                                <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="profile" width="24" height="24">
+                                <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="profile">
                             </td>
                         </tr>
                         <tr>
@@ -73,13 +69,13 @@
                             </tr>
                         {% endif %}
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" align="center">
                                 <img src="{% static 'profileapp/img/phone-icon.png' %}" alt="phone" width="24" height="24">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Внут. тел.
+                                Внут. номер
                             </td>
                             <td>
                                 {% firstof profile.phone 'Нет данных' %}
@@ -92,22 +88,20 @@
                                         {{ phone.title }}
                                     </td>
                                     <td>
-                                        {{ phone.num }}
+                                        {{ phone.number }}
                                     </td>
                                 </tr>
                             {% endfor %}
                         {% endif %}
-                        {% if user.is_staff or user.is_superuser or perms.profileapp.change_profile or user.pk == profile.user.pk %}
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-add">
-                                        добавить номер
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endif %}
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" align="center">
+                                <a href="#" class="link-button">
+                                    добавить номер
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
                                 <img src="{% static 'profileapp/img/email-icon.png' %}" alt="email" width="24" height="24">
                             </td>
                         </tr>
@@ -120,25 +114,33 @@
                             </td>
                         </tr>
                         {% if profile.emails %}
-                            {% for email in profile.emails.all %}
+                            {% for email in profile.emails %}
                                 <tr>
                                     <td>
                                         {{ email.title }}
                                     </td>
                                     <td>
-                                        {{ email.addr }}
+                                        {{ email.address }}
                                     </td>
                                 </tr>
                             {% endfor %}
                         {% endif %}
-                        {% if user.is_staff or user.is_superuser or perms.profileapp.change_profile or user.pk == profile.user.pk %}
-                            <a href="#" class="btn-add">
-                                добавить адрес
-                            </a>
+                        {% if perms.email.add_email or user.pk == profile.user.pk %}
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <a href="#" class="link-button">
+                                        добавить почту
+                                    </a>
+                                </td>
+                            </tr>
                         {% endif %}
                     </table>
                 </td>
             </tr>
         </table>
-    {% endif %}
-{% endblock %}
+    {% endblock %}
+{% else %}
+    <h1>
+        Нет профиля для отображения.
+    </h1>
+{% endif %} {# if profile #}
