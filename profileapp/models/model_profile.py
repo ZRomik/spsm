@@ -42,5 +42,12 @@ class Profile(models.Model):
                     result = "".join([result, " ", self.middlename[:1].upper(), "."])
         return result
 
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        if self.nmn:
+            self.middlename = ""
+        super().save()
+
     class Meta:
         db_table = "profiles"
