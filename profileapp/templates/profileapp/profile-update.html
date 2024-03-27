@@ -64,12 +64,10 @@
         {% endif %}
         <tr>
             <td>
-                <label for="id_nmn">
-                    Нет отчества
-                </label>
+                <label for="id_nmn">Нет отчества</label>
             </td>
             <td>
-                <input type="checkbox" id="id_nmn" name="nmn" checked="{% if profile.nmn %} 'checked' {% else %} '' {% endif %}">
+                <input type="checkbox" id="id_nmn" name="nmn" value="{% if profile.nmn %} 'checked' {% else %} '' {% endif %}">
             </td>
         </tr>
     </table>
