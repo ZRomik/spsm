@@ -34,9 +34,11 @@
                     {% else %}
                         <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
                     {% endif %}
-                    <a href="#" class="link-button150">
-                        загрузить
-                    </a>
+                    {% if perms.profileapp.change_avatar or user.pk == profile.user.pk %}
+                        <a href="#" class="link-button150">
+                            загрузить
+                        </a>
+                    {% endif %}
                 </td>
                 <td>
                     <table>
