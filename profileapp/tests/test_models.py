@@ -52,3 +52,19 @@ class ModelProfileTestCase(TransactionTestCase):
             )
             if profile:
                 profile.delete()
+
+    def test_model_profile_fio(self):
+        profile = Profile.objects.create(
+            user_id=self.simple_user.pk
+        )
+        fio = "Нет данных"
+        self.assertIsNotNone(
+            profile,
+            "Профиль не создан!"
+        )
+        self.assertEqual(
+            profile.fio,
+            fio,
+            "ФИО не совпадают!"
+        )
+        profile.delete()
