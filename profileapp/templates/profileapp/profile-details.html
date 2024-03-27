@@ -28,12 +28,15 @@
                 </tr>
             </thead>
             <tr>
-                <td>
+                <td align="center">
                     {% if profile.avatar.image %}
                         <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
                     {% else %}
                         <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
                     {% endif %}
+                    <a href="#" class="link-button150">
+                        загрузить
+                    </a>
                 </td>
                 <td>
                     <table>
@@ -95,7 +98,7 @@
                         {% endif %}
                         <tr>
                             <td colspan="2" align="center">
-                                <a href="#" class="link-button">
+                                <a href="#" class="link-button170">
                                     добавить номер
                                 </a>
                             </td>
@@ -128,7 +131,7 @@
                         {% if perms.email.add_email or user.pk == profile.user.pk %}
                             <tr>
                                 <td colspan="2" align="center">
-                                    <a href="#" class="link-button">
+                                    <a href="#" class="link-button170">
                                         добавить почту
                                     </a>
                                 </td>
