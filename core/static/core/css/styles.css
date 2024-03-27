@@ -112,7 +112,7 @@ body {
 	overflow-y: auto;
 }
 
-.link-button {
+.link-button170 {
 	display: block;
 	width: 170px;
 	text-transform: uppercase;
@@ -123,7 +123,7 @@ body {
 	text-align: center;
 }
 
-.link-button:hover {
+.link-button170:hover {
 	background-color: green;
 	color:  yellow;
 }
