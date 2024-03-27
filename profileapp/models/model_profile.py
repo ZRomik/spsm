@@ -40,7 +40,7 @@ class Profile(models.Model):
                 result = "".join([result, " ", self.firstname[:1].upper(), "."])
                 if self.middlename and not self.nmn:
                     result = "".join([result, " ", self.middlename[:1].upper(), "."])
-            return result
+        return result
 
     class Meta:
         db_table = "profiles"
