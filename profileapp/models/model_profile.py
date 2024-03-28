@@ -46,7 +46,7 @@ class Profile(models.Model):
         self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         if self.nmn:
-            self.middlename = ""
+            self.middlename = None
         super().save()
 
     class Meta:
