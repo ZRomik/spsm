@@ -131,6 +131,7 @@ body {
 .link-button150 {
 	display: block;
 	width: 150px;
+	border: none;
 	text-transform: uppercase;
 	font-weight: bold;
 	color: green;
@@ -142,4 +143,25 @@ body {
 .link-button150:hover {
 	background-color: green;
 	color:  yellow;
+}
+
+button.save-button {
+	width: 125px;
+	color: green;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: none;
+	/*border-radius: 15px;*/
+	border: none;
+	font-size: 17px;
+	text-align: center;
+	cursor: pointer;
+	height: 25px;
+}
+
+button.save-button:hover {
+	background-color: green;
+	color: yellow;
+	border-radius: 15px;
 }
