@@ -165,3 +165,46 @@ button.save-button:hover {
 	color: yellow;
 	border-radius: 15px;
 }
+
+.load-button {
+	display: block;
+	background: none;
+	width: 125px;
+	height: 25px;
+	border: none;
+	color: green;
+	font-weight: bold;
+	font-size: 18px;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: center;
+}
+
+.load-button:hover {
+	border-color: green;
+	color: yellow;
+	background-color: green;
+	border-radius: 15px;
+}
+
+.add-button {
+	display: block;
+	background: none;
+	width: 180px;
+	height: 25px;
+	border: none;
+	color: green;
+	font-weight: bold;
+	font-size: 16px;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: center;
+}
+
+.add-button:hover {
+	background-color: green;
+	color: yellow;
+	border-radius: 15px;
+}
