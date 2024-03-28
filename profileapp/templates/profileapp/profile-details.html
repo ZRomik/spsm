@@ -33,9 +33,9 @@
                         <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
                     {% else %}
                         <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
-                    {% endif %}
+                    {% endif %}<br/>
                     {% if perms.profileapp.change_avatar or user.pk == profile.user.pk %}
-                        <a href="#" class="link-button150">
+                        <a href="#" class="load-button">
                             загрузить
                         </a>
                     {% endif %}
@@ -100,7 +100,7 @@
                         {% endif %}
                         <tr>
                             <td colspan="2" align="center">
-                                <a href="#" class="link-button170">
+                                <a href="#" class="add-button">
                                     добавить номер
                                 </a>
                             </td>
@@ -133,7 +133,7 @@
                         {% if perms.email.add_email or user.pk == profile.user.pk %}
                             <tr>
                                 <td colspan="2" align="center">
-                                    <a href="#" class="link-button170">
+                                    <a href="#" class="add-button">
                                         добавить почту
                                     </a>
                                 </td>
