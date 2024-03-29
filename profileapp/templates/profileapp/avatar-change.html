@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" id="change_avatar">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Текущий Аватар
+                    </th>
+                    <th>
+                        Новый аватар
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    {% if avatar.image %}
+                        <img src="{{ avatar.image.url }}" alt="avatar" width="150" height="150">
+                    {% else %}
+                        <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                    {% endif %}
+                </td>
+                <td>
+                    <input type="file" id="id_avatar" name="image">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit" class="save-button">
+                        Сохранить
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
