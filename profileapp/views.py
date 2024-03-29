@@ -26,3 +26,11 @@ def view_user_profile(request: HttpRequest, pk: int) -> HttpResponse:
             return HttpResponse(status=404)
     else:
         return HttpResponse(status=405)
+
+def change_avatar_view(request):
+    if request.method == "GET":
+        return render(request, "profileapp/avatar-change.html")
+    elif request.method == "POST":
+        print(request.POST)
+        print(request.FILES)
+        return HttpResponse(status=200, content="<b>POST запрос выполнен.</b>")
