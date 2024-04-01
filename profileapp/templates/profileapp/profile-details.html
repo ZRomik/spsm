@@ -3,7 +3,7 @@
 {% load static %}
 
 {% if profile %}
-    {% if perms.profileapp.change_profile or user.is_staff %}
+    {% if perms.profileapp.change_profile or user.is_staff or user.is_superuser %}
         {% block custom-menu %}
             <li class="menu-item">
                 <a href="#" class="menu-link">
