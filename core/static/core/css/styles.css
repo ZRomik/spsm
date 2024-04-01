@@ -118,7 +118,7 @@ body {
 	text-transform: uppercase;
 	font-weight: bold;
 	color: green;
-	border-radius: 15px;
+	border-radius: 7px;
 	text-decoration: none;
 	text-align: center;
 }
@@ -135,7 +135,7 @@ body {
 	text-transform: uppercase;
 	font-weight: bold;
 	color: green;
-	border-radius: 15px;
+	border-radius: 7px;
 	text-decoration: none;
 	text-align: center;
 }
@@ -158,12 +158,13 @@ button.save-button {
 	text-align: center;
 	cursor: pointer;
 	height: 25px;
+	border: none;
 }
 
 button.save-button:hover {
 	background-color: green;
 	color: yellow;
-	border-radius: 15px;
+	border-radius: 7px;
 }
 
 .load-button {
@@ -185,14 +186,14 @@ button.save-button:hover {
 	border-color: green;
 	color: yellow;
 	background-color: green;
-	border-radius: 15px;
+	border-radius: 7px;
 }
 
 .add-button {
 	display: block;
 	background: none;
-	width: 180px;
-	height: 25px;
+	width: 165px;
+	height: 23px;
 	border: none;
 	color: green;
 	font-weight: bold;
@@ -206,5 +207,5 @@ button.save-button:hover {
 .add-button:hover {
 	background-color: green;
 	color: yellow;
-	border-radius: 15px;
+	border-radius: 7px;
 }
