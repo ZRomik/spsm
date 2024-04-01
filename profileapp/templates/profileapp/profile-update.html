@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content-title %}
-    Редактирование профиля {{ profile.fio }}
+Реадактирование профиля {{ profile.fio }}
 {% endblock %}
 
 {% block content %}
@@ -19,55 +19,17 @@
             </tr>
         </thead>
         <tr>
-            <td align="center" valign="center">
-                {% if profile.avatar.image %}
-                    <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
-                {% else %}
-                    <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <img src="{% static 'profileapp/img/profile-icon.png' %}" alt="profile" width="24" height="24">
-            </td>
-        </tr>
-        <tr>
             <td>
-                <label for="id_lastname">
-                    Фамилия
-                </label>
-            </td>
-            <td>
-                <input type="text" id="id_lastname" name="lastname" value="{% firstof profile.lastname '' %}">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="id_firstname">
-                    Имя
-                </label>
-            </td>
-            <td>
-                <input type="text" id="id_firstname" name="firstname" value="{% firstof profile.firstname '' %}">
-            </td>
-        </tr>
-        {% if not profile.nmn %}
-            <tr>
-                <td>
-                    Отчество
-                </td>
-                <td>
-                    <input type="text" id="id_middlename" name="middlename" value="{% firstof profile.middlename '' %}">
-                </td>
-            </tr>
-        {% endif %}
-        <tr>
-            <td>
-                <label for="id_nmn">Нет отчества</label>
-            </td>
-            <td>
-                <input type="checkbox" id="id_nmn" name="nmn" value="{% if profile.nmn %} 'checked' {% else %} '' {% endif %}">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {% if profile.avatar.image %}
+                            <img src="{{ profile.avatar.image.url }}" alt="avatar" width="150" height="150">
+                        {% else %}
+                            <img src="{% static 'profileapp/img/default-avatar.png' %}" alt="avatar" width="150" height="150">
+                        {% endif %}
+                    </table>
+                </form>
             </td>
         </tr>
     </table>
